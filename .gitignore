@@ -1,20 +1,20 @@
-# Build folders
 bin/
 obj/
+*.dll
+*.exe
+*.apk
+*.app
+*.pdb
+*.runtimeconfig.json
+*.s
 
-# Visual Studio / VS Code
-.vs/
-.vscode/
-
-# Mac
+# macOS
 .DS_Store
 
-# Logs
-*.log
+# IDE
+.vscode/
+.idea/
 
-# NuGet
-*.nupkg
-project.assets.json
-
-# JDK / SDK (IMPORTANT)
+# JDK (IMPORTANT)
 *.jdk/
+oracleJdk-25.jdk/
