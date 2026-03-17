@@ -1,4 +1,4 @@
-namespace MauiApp1;
+namespace LeafBucket.pages.farmer;
 
 public partial class FarmerDashboard : ContentPage
 {

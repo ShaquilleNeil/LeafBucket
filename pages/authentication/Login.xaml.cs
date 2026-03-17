@@ -14,4 +14,9 @@ public partial class Login : ContentPage
 	{
 		Navigation.PushAsync(new SignUp());
 	}
+
+	private void ForgotPasswordNavigation(object sender, EventArgs e)
+	{
+		Navigation.PushAsync(new ForgotPassword());
+	}
 }
