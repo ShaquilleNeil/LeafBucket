@@ -14,15 +14,29 @@
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
 
-            <Entry Placeholder="Email"
+            <Entry x:Name="Email"
+                 Placeholder="Email"
                 VerticalOptions="Center" 
                 Margin="0,20,0,20"
                 />
 
-            <Entry Placeholder="Password"
+            <Label x:Name="EmailErrorLabel"
+                   TextColor="Red"
+                   IsVisible="False"
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Start" />
+
+            <Entry x:Name="Password"
+                 Placeholder="Password"
                 VerticalOptions="Center" 
                 Margin="0,20,0,20"
                 />
+
+            <Label x:Name="PasswordErrorLabel"
+                   TextColor="Red"
+                   IsVisible="False"
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Start" />
 
            <Grid ColumnDefinitions="Auto,Auto,*,Auto"
       ColumnSpacing="6"
@@ -53,6 +67,7 @@
                 VerticalOptions="Center"
                 Padding="20"
                 Margin="0,0,0,20"
+                Clicked="LoginButton_Clicked"
                 />
 
             <Grid ColumnDefinitions="Auto,Auto"

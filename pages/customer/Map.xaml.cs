@@ -1,4 +1,5 @@
-namespace MauiApp1;
+namespace LeafBucket.pages.customer;
+
 
 public partial class Map : ContentPage
 {
@@ -7,3 +8,4 @@ public partial class Map : ContentPage
 		InitializeComponent();
 	}
 }
+

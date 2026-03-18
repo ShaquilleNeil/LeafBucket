@@ -3,14 +3,30 @@
     x:Class="LeafBucket.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:LeafBucket"
+    xmlns:customer="clr-namespace:LeafBucket.pages.customer"
     Shell.FlyoutBehavior="Disabled"
     Title="LeafBucket">
 
+
+   <TabBar>
+
     <ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        ContentTemplate="{DataTemplate customer:CustomerHome}" />
+
+        <ShellContent
+        Title="Map"
+        ContentTemplate="{DataTemplate customer:Map}" />
+
+    <ShellContent
+        Title="Orders"
+        ContentTemplate="{DataTemplate customer:Orders}" />
+
+    <ShellContent
+        Title="Profile"
+        ContentTemplate="{DataTemplate customer:Profile}" />
+
+</TabBar>
 
        
 

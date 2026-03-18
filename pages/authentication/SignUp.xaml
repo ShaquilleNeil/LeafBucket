@@ -18,6 +18,11 @@
                 VerticalOptions="Center" 
                 Margin="0,20,0,20"
                 />
+                <Label x:Name="FirstNameErrorLabel"
+                   TextColor="Red"
+                   IsVisible="False"
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Start" />
 
                 <Entry
                      x:Name="LastName"
@@ -25,6 +30,11 @@
                 VerticalOptions="Center" 
                 Margin="0,20,0,20"
                 />
+                    <Label x:Name="LastNameErrorLabel"
+                    TextColor="Red"
+                    IsVisible="False"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Start" />
 
             <Entry
                  x:Name="Email"
@@ -32,6 +42,38 @@
                 VerticalOptions="Center" 
                 Margin="0,20,0,20"
                 />
+                    <Label x:Name="EmailErrorLabel"
+                    TextColor="Red"
+                    IsVisible="False"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Start" />
+
+            <Entry
+                 x:Name="PhoneNumber"
+                 Placeholder="Phone Number"
+                VerticalOptions="Center" 
+                Margin="0,20,0,20"
+                Keyboard="Telephone"
+                />
+
+                    <Label x:Name="PhoneNumberErrorLabel"
+                    TextColor="Red"
+                    IsVisible="False"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Start" />
+
+            <Entry
+                 x:Name="Address"
+                 Placeholder="Address"
+                VerticalOptions="Center" 
+                Margin="0,20,0,20"
+                />
+
+                    <Label x:Name="AddressErrorLabel"
+                    TextColor="Red"
+                    IsVisible="False"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Start" />
 
             <Entry
                  x:Name="Password"
@@ -39,12 +81,22 @@
                 VerticalOptions="Center" 
                 Margin="0,20,0,20"
                 />
+                    <Label x:Name="PasswordErrorLabel"
+                    TextColor="Red"
+                    IsVisible="False"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Start" />
 
                 <Entry x:Name="ConfirmPassword"
                  Placeholder="Confirm Password"
                 VerticalOptions="Center" 
                 Margin="0,20,0,20"
                 />
+                    <Label x:Name="ConfirmPasswordErrorLabel"
+                    TextColor="Red"
+                    IsVisible="False"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Start" />
 
 
                 <Label Text="I am a: "
@@ -74,11 +126,18 @@
            VerticalOptions="Center" /> 
 
 </Grid>
+ 
+ <Label x:Name="RoleErrorLabel"
+                    TextColor="Red"
+                    IsVisible="False"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Start" />
 
             <Button Text="SignUp"
                 VerticalOptions="Center"
                 Padding="20"
                 Margin="0,0,0,20"
+                Clicked="SignUpButton_Clicked"
                 />
 
             <Grid ColumnDefinitions="Auto,Auto"

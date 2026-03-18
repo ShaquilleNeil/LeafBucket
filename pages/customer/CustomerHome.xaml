@@ -5,7 +5,7 @@
              Title="LeafBucket.CustomerHome">
     <VerticalStackLayout>
         <Label 
-            Text="Welcome to .NET MAUI!"
+            Text="Welcome to .NET MAUI! Customer Home"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
     </VerticalStackLayout>

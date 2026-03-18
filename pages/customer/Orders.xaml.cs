@@ -1,4 +1,4 @@
-namespace MauiApp1;
+namespace LeafBucket.pages.customer;
 
 public partial class Orders : ContentPage
 {
