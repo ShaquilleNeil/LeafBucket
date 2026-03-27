@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LeafBucket.Views.Auth.LoginPage"
+             Title="Login">
+
+    <VerticalStackLayout
+        VerticalOptions="Center"
+        Padding="30,0"
+        >
+
+        <Label 
+            Text="Fresh from the Farm "
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+            <Entry x:Name="Email"
+                 Placeholder="Email"
+                VerticalOptions="Center" 
+                Margin="0,20,0,20"
+                />
+
+            <Label x:Name="EmailErrorLabel"
+                   TextColor="Red"
+                   IsVisible="False"
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Start" />
+
+            <Entry x:Name="Password"
+                 Placeholder="Password"
+                VerticalOptions="Center" 
+                Margin="0,20,0,20"
+                />
+
+            <Label x:Name="PasswordErrorLabel"
+                   TextColor="Red"
+                   IsVisible="False"
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Start" />
+
+           <Grid ColumnDefinitions="Auto,Auto,*,Auto"
+      ColumnSpacing="6"
+      VerticalOptions="Center"
+      Margin="0,10,0,20">
+
+    <CheckBox Grid.Column="0"
+              IsChecked="False"
+              VerticalOptions="Center" />
+
+    <Label Grid.Column="1"
+           Text="Remember me"
+           VerticalOptions="Center" />
+
+    <Label Grid.Column="3"
+           Text="Forgot Password?"
+           TextColor="#ACF117"
+           VerticalOptions="Center"
+           HorizontalOptions="End">
+        <Label.GestureRecognizers>
+            <TapGestureRecognizer Tapped="ForgotPasswordNavigation" />
+        </Label.GestureRecognizers>
+    </Label>
+
+</Grid>
+
+            <Button Text="Login"
+                VerticalOptions="Center"
+                Padding="20"
+                Margin="0,0,0,20"
+                Clicked="LoginButton_Clicked"
+                />
+
+            <Grid ColumnDefinitions="Auto,Auto"
+      ColumnSpacing="6"
+      VerticalOptions="Center"
+      HorizontalOptions="Center"
+      Margin="0,10,0,20">
+
+            <Label Grid.Column="0"
+                 Text="Don't have an account?"
+                VerticalOptions="Center"
+                HorizontalOptions="Center" />
+
+            <Label Grid.Column="1"
+                 Text="Create one now"
+                TextColor="#ACF117"
+                VerticalOptions="Center"
+                HorizontalOptions="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="CreateAccountNavigation" />
+                </Label.GestureRecognizers>
+            </Label>
+
+        </Grid>
+
+
+
+    </VerticalStackLayout>
+</ContentPage>

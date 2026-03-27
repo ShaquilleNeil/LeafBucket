@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:components="clr-namespace:LeafBucket.Components"
+             x:Class="LeafBucket.Views.Customer.HomePage"
+             >
+    <VerticalStackLayout
+        Padding="10">
+
+        <Border
+            Stroke="DarkSlateGray"
+            StrokeThickness="2"
+            StrokeShape="RoundRectangle 10"
+            Padding="2"
+            Margin="0,0,0,20"
+            >
+            <SearchBar Placeholder="Search Products..." TextChanged="SearchBar_TextChanged" />
+
+
+        </Border>
+       
+
+        <!--<CollectionView x:Name="searchResults" />-->
+
+
+
+
+        <!--<CollectionView x:Name="defaultContent">
+
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="2"/>
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <components:ProductCard 
+                Title="{Binding Title}" 
+                Description="{Binding Description}" />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>-->
+        
+        <Grid 
+    ColumnDefinitions="*,*" 
+    RowDefinitions="Auto,Auto"
+    ColumnSpacing="10" 
+    RowSpacing="10">
+
+            <components:ProductCard 
+        Grid.Row="0" Grid.Column="0"
+        Title="Loading..."
+        Description="..."
+        ProductType="..."
+        Location="..."
+        Price="$--"
+        ImageUrl="placeholder.png"/>
+
+            <components:ProductCard 
+        Grid.Row="0" Grid.Column="1"
+        Title="Loading..."
+        Description="..."
+        ProductType="..."
+        Location="..."
+        Price="$--"
+        ImageUrl="placeholder.png"/>
+
+            <components:ProductCard 
+        Grid.Row="1" Grid.Column="0"
+        Title="Loading..."
+        Description="..."
+        ProductType="..."
+        Location="..."
+        Price="$--"
+        ImageUrl="placeholder.png"/>
+
+            <components:ProductCard 
+        Grid.Row="1" Grid.Column="1"
+        Title="Loading..."
+        Description="..."
+        ProductType="..."
+        Location="..."
+        Price="$--"
+        ImageUrl="placeholder.png"/>
+
+        </Grid>
+
+    </VerticalStackLayout>
+</ContentPage>

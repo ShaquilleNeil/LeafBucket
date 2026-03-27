@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView 
+    x:Name="self"
+    x:Class="LeafBucket.Components.ProductCard"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <Border StrokeShape="RoundRectangle 10" Padding="10" WidthRequest="190">
+        <VerticalStackLayout>
+            <!-- Product Image -->
+            <Image 
+                Source="{Binding ImageUrl, Source={x:Reference self}}"
+                HeightRequest="120"
+                Aspect="AspectFill"/>
+
+            <!-- Product Type -->
+            <Label 
+                Text="{Binding ProductType, Source={x:Reference self}}"
+                FontSize="12"
+                TextColor="Gray"/>
+
+            <!-- Title -->
+            <Label 
+                Text="{Binding Title, Source={x:Reference self}}"
+                FontAttributes="Bold"
+                FontSize="16"/>
+
+            <!-- Location -->
+            <Label 
+                Text="{Binding Location, Source={x:Reference self}}"
+                FontSize="12"
+                TextColor="Gray"/>
+
+            <!-- Price -->
+            <Label 
+                Text="{Binding Price, Source={x:Reference self}}"
+                FontSize="14"
+                TextColor="Green"
+                FontAttributes="Bold"/>
+
+            <!-- Add to Cart Button -->
+            <Button 
+                Text="Add to Cart"
+                BackgroundColor="Black"
+                TextColor="White"
+                CornerRadius="8"/>
+        </VerticalStackLayout>
+    </Border>
+
+</ContentView>

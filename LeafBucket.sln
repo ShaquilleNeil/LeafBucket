@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeafBucket", "LeafBucket\LeafBucket.csproj", "{39B4D39F-57F7-F213-49CD-B12CFEBCF722}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeafBucket", "LeafBucket.csproj", "{068F32F0-B25D-DB3D-2172-FE96C8E46BC7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -10,10 +10,12 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{39B4D39F-57F7-F213-49CD-B12CFEBCF722}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{39B4D39F-57F7-F213-49CD-B12CFEBCF722}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{39B4D39F-57F7-F213-49CD-B12CFEBCF722}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{39B4D39F-57F7-F213-49CD-B12CFEBCF722}.Release|Any CPU.Build.0 = Release|Any CPU
+		{068F32F0-B25D-DB3D-2172-FE96C8E46BC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{068F32F0-B25D-DB3D-2172-FE96C8E46BC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{068F32F0-B25D-DB3D-2172-FE96C8E46BC7}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{068F32F0-B25D-DB3D-2172-FE96C8E46BC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{068F32F0-B25D-DB3D-2172-FE96C8E46BC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{068F32F0-B25D-DB3D-2172-FE96C8E46BC7}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

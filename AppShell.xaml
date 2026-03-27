@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="LeafBucket.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:customer="clr-namespace:LeafBucket.Views.Customer"
+    Shell.FlyoutBehavior="Disabled"
+    Title="LeafBucket">
+
+
+   <TabBar>
+
+    <ShellContent
+        Title="Home"
+        Icon="house.png"
+        ContentTemplate="{DataTemplate customer:HomePage}" />
+
+        <ShellContent
+        Title="Map"
+            Icon="mappin.png"
+        ContentTemplate="{DataTemplate customer:MapPage}" />
+
+    <ShellContent
+        Title="Orders"
+        Icon="folders.png"
+        ContentTemplate="{DataTemplate customer:OrdersPage}" />
+
+    <ShellContent
+        Title="Profile"
+        Icon="user.png"
+        ContentTemplate="{DataTemplate customer:ProfilePage}" />
+
+</TabBar>
+
+       
+
+</Shell>
+
+

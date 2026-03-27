@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+   
+    x:Class="LeafBucket.FarmerShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:farmer="clr-namespace:LeafBucket.Views.Farmer"
+    Shell.FlyoutBehavior="Disabled"
+    Title="LeafBucket">
+
+
+
+    <TabBar>
+
+        <ShellContent
+        Title="Dashboard"
+            Icon="layoutdashboard.png"
+        ContentTemplate="{DataTemplate farmer:DashboardPage}" />
+
+        <ShellContent
+        Title="Products"
+         Icon="apple.png"
+        ContentTemplate="{DataTemplate farmer:ProductsPage}" />
+
+        <ShellContent
+        Title="Orders"
+            Icon="packagesearch.png"
+        ContentTemplate="{DataTemplate farmer:OrdersPage}" />
+
+        <ShellContent
+        Title="Profile"
+            Icon="user.png"
+        ContentTemplate="{DataTemplate farmer:ProfilePage}" />
+
+    </TabBar>
+
+
+
+
+</Shell>
+
+
