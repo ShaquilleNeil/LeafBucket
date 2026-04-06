@@ -73,6 +73,9 @@
 	  <Compile Update="FarmerShell.xaml.cs">
 	    <DependentUpon>FarmerShell.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\Farmer\FarmerOrderDetailsPage.xaml.cs">
+	    <DependentUpon>FarmerOrderDetailsPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>

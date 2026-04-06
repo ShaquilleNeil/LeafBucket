@@ -2,9 +2,9 @@ using LeafBucket.ViewModels.Farmer;
 
 namespace LeafBucket.Views.Farmer;
 
-public partial class OrderDetailsPage : ContentPage
+public partial class FarmerOrderDetailsPage : ContentPage
 {
-	public OrderDetailsPage()
+	public FarmerOrderDetailsPage()
 	{
 		InitializeComponent();
         BindingContext = new OrderDetailsViewModel();

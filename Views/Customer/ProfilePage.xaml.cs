@@ -31,6 +31,7 @@ public partial class ProfilePage : ContentPage
             customerName.Text = $"{user.firstName} {user.lastName}";
             customerAddress.Text = user.address;
             customerPhone.Text = user.phoneNumber;
+            customerEmail.Text = user.email;
         }
     }
 

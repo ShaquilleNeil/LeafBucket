@@ -1,12 +1,44 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:components="clr-namespace:LeafBucket.Components"
              x:Class="LeafBucket.Views.Customer.OrdersPage"
              Title="Orders">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+    <VerticalStackLayout
+        Padding="10"
+        >
+
+
+        <components:OrderCard
+    OrderId="Order #1028"
+    Status="Preparing"
+    Summary="2 Items - Eggs, Milk"
+    Date="March 27th, 2026"/>
+
+        <components:OrderCard
+    OrderId="Order #1027"
+    Status="Shipped"
+    Summary="4 Items - Carrots, Bananas, Milk, Eggs"
+    Date="March 26th, 2026"/>
+
+        <components:OrderCard
+    OrderId="Order #1026"
+    Status="Cancelled"
+    Summary="1 Item - Strawberries"
+    Date="March 25th, 2026"/>
+
+        <components:OrderCard
+    OrderId="Order #1025"
+    Status="Processing"
+    Summary="3 Items - Lettuce, Tomatoes, Cucumbers"
+    Date="March 24th, 2026"/>
+
+        <components:OrderCard
+    OrderId="Order #1024"
+    Status="Preparing"
+    Summary="5 Items - Apples, Bananas, Milk, Eggs, Carrots"
+    Date="March 23rd, 2026"/>
+
+
     </VerticalStackLayout>
 </ContentPage>

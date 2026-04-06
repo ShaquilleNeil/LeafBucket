@@ -4,28 +4,80 @@
              x:Class="LeafBucket.Views.Customer.ProfilePage"
              Title="Profile">
     <VerticalStackLayout
-        VerticalOptions="Center"
-        HorizontalOptions="Center">
-        
-        
+       
+       Padding="20">
+
+        <Frame 
+    WidthRequest="200"
+    HeightRequest="200"
+    CornerRadius="100"
+    Padding="0"
+    HasShadow="False">
+
+            <Image 
+        Source="https://randomuser.me/api/portraits/men/1.jpg"
+        Aspect="AspectFill"/>
+        </Frame>
+
         <Label 
            x:Name="customerName"
            Text=""
-            TextColor="Red"
+            HorizontalOptions="Center"
+            FontSize="40"
            />
 
-        <Label 
-    x:Name="customerAddress"
-    Text=""
-     TextColor="Red"
-    />
 
         <Label 
-    x:Name="customerPhone"
-    Text=""
-     TextColor="Red"
-    />
-        
+     x:Name="customerEmail"
+     Text=""
+      TextColor="Gray"
+            
+      HorizontalOptions="Center"
+            Margin="0,0,0,50"
+     />
+
+
+        <Label Text="Address" TextColor="Gray" Margin="0,0,0,10" />
+
+        <VerticalStackLayout
+                BackgroundColor="LightGray"
+            HeightRequest="80"
+           Padding="20"
+            Margin="0,0,0,10"
+                >
+
+                <Label 
+                    x:Name="customerAddress"
+                    Text=""
+                     TextColor="Red"
+                      FontSize="20"
+                   
+                    />
+
+            </VerticalStackLayout>
+
+
+
+        <Label Text="Phone" TextColor="Gray" Margin="0,0,0,10" />
+
+        <VerticalStackLayout
+         BackgroundColor="LightGray"
+     HeightRequest="80"
+    Padding="20"
+             Margin="0,0,0,20"
+         >
+
+            <Label 
+             x:Name="customerPhone"
+             Text=""
+              TextColor="Red"
+                          />
+
+
+        </VerticalStackLayout>
+
+
+   
         <Button
             Text="Edit Profile"
           
