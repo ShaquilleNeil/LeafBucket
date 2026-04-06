@@ -39,11 +39,11 @@
                 FontAttributes="Bold"/>
 
             <!-- Add to Cart Button -->
-            <Button 
+            <!--<Button 
                 Text="Add to Cart"
                 BackgroundColor="Black"
                 TextColor="White"
-                CornerRadius="8"/>
+                CornerRadius="8"/>-->
         </VerticalStackLayout>
     </Border>
 

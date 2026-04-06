@@ -9,6 +9,7 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem
             IconImageSource="cart.png"
+            Clicked="openCart"
             
             />
 
@@ -29,7 +30,7 @@
 
             </Border>
 
-            <CollectionView Grid.Row="1" x:Name="ProductsCollection">
+            <CollectionView Grid.Row="1" x:Name="ProductsCollection" SelectionMode="Single" SelectionChanged="ProductSelected">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical" Span="2"/>
                 </CollectionView.ItemsLayout>

@@ -46,6 +46,20 @@ public partial class HomePage : ContentPage
             }
            
         }
+
+
+        private async void ProductSelected(object sender, SelectionChangedEventArgs e) {
+            if (e.CurrentSelection.FirstOrDefault() is Product selected) {
+                await Navigation.PushAsync(new ProductDetailsPage(selected));
+                ProductsCollection.SelectedItem = null;
+            }
+        }
+
+        private async void openCart(object sender, EventArgs e) {
+            await Navigation.PushAsync(new CartPage());
+        }
+
+
     }
 
 

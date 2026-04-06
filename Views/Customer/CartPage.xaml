@@ -3,10 +3,58 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LeafBucket.Views.Customer.CartPage"
              Title="Cart">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ScrollView>
+        <VerticalStackLayout>
+
+            <Grid RowDefinitions="*, Auto" Padding="10">
+
+                <CollectionView Grid.Row="0" x:Name="CartCollection">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="Auto, *, Auto" Padding="5">
+
+                                <Image Grid.Column="0"
+                                       Source="{Binding imageUrl}"
+                                       HeightRequest="60" WidthRequest="60"
+                                       Aspect="AspectFill"/>        
+
+                                <VerticalStackLayout Grid.Column="1" Padding="5">
+                                    <Label Text="{Binding name}" FontAttributes="Bold"/>
+                                    <Label Text="{Binding formattedPrice}" TextColor="Green"/>
+                                </VerticalStackLayout>
+
+                                <HorizontalStackLayout Grid.Column="2">
+                                    <Button Text="-" Clicked="Decrease_Clicked"/>
+                                    <Label Text="{Binding quantity}"/>
+                                    <Button Text="+" Clicked="Increase_Clicked"/>
+                                    <Button Text="X" Clicked="Remove_Clicked" BackgroundColor="Red"/>
+                                </HorizontalStackLayout>
+
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <VerticalStackLayout Grid.Row="1">
+                    <Label x:Name="subtotalLabel"/>
+                    <Label x:Name="deliveryLabel"/>
+                    <Label x:Name="taxLabel"/>
+                    <Label x:Name="totalLabel"/>
+                    <Button Text="Proceed to Checkout" Clicked="Checkout_Clicked"/>
+                </VerticalStackLayout>
+
+            </Grid>
+
+
+
+
+
+
+
+        </VerticalStackLayout>
+
+
+
+    </ScrollView>
+   
 </ContentPage>
