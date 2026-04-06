@@ -1,5 +1,5 @@
+using LeafBucket.Helpers;
 using LeafBucket.Services;
-using LeafBucket.ViewModels.Auth;
 
 namespace LeafBucket.Views.Auth;
 
@@ -9,7 +9,7 @@ public partial class LoginPage : ContentPage
 	public LoginPage()
 	{
 		InitializeComponent();
-        BindingContext = new LoginViewModel();
+        
 	}
 
 
@@ -68,7 +68,16 @@ public partial class LoginPage : ContentPage
 
         Console.WriteLine($"Role: {user.role}");
 
-        if (user.role == "Customer")
+            SessionManager.Location = user.address;
+            SessionManager.UserId = auth.localId;
+            SessionManager.IdToken = auth.idToken;
+
+            await SecureStorage.SetAsync("userId", auth.localId);
+            await SecureStorage.SetAsync("idToken", auth.idToken);
+            await SecureStorage.SetAsync("role", user.role);
+            await SecureStorage.SetAsync("location", user.address);
+
+            if (user.role == "Customer")
     Application.Current.MainPage = new AppShell();
 else if (user.role == "Farmer")
     Application.Current.MainPage = new FarmerShell();

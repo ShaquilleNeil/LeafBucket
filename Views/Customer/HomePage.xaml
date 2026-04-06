@@ -13,90 +13,41 @@
             />
 
     </ContentPage.ToolbarItems>
-    
-    
-    
-    <VerticalStackLayout
-        Padding="10">
 
-        <Border
-            Stroke="DarkSlateGray"
-            StrokeThickness="2"
-            StrokeShape="RoundRectangle 10"
-            Padding="2"
-            Margin="0,0,0,20"
-            >
-            <SearchBar Placeholder="Search Products..." TextChanged="SearchBar_TextChanged" />
+    <Grid RowDefinitions="Auto, *">
+            <Border
+               Grid.Row="0"
+     Stroke="DarkSlateGray"
+     StrokeThickness="2"
+     StrokeShape="RoundRectangle 10"
+     Padding="2"
+     Margin="0,0,0,20"
+               
+     >
+                <SearchBar Placeholder="Search Products..." TextChanged="SearchBar_TextChanged" />
 
 
-        </Border>
-       
+            </Border>
 
-        <!--<CollectionView x:Name="searchResults" />-->
+            <CollectionView Grid.Row="1" x:Name="ProductsCollection">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="2"/>
+                </CollectionView.ItemsLayout>
 
-
-
-
-        <!--<CollectionView x:Name="defaultContent">
-
-            <CollectionView.ItemsLayout>
-                <GridItemsLayout Orientation="Vertical" Span="2"/>
-            </CollectionView.ItemsLayout>
-
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <components:ProductCard 
-                Title="{Binding Title}" 
-                Description="{Binding Description}" />
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-
-        </CollectionView>-->
-        
-        <Grid 
-    ColumnDefinitions="*,*" 
-    RowDefinitions="Auto,Auto"
-    ColumnSpacing="10" 
-    RowSpacing="10">
-
-            <components:ProductCard 
-    Grid.Row="0" Grid.Column="0"
-    Title="Bananas"
-    Description="Sweet and ripe bananas from local farms"
-    ProductType="Fruit"
-    Location="Montreal, QC"
-    Price="$2.99 / lb"
-    ImageUrl="https://upload.wikimedia.org/wikipedia/commons/8/8a/Banana-Single.jpg"/>
-
-            <components:ProductCard 
-    Grid.Row="0" Grid.Column="1"
-    Title="Organic Eggs"
-    Description="Free-range eggs, dozen pack"
-    ProductType="Dairy"
-    Location="Laval, QC"
-    Price="$5.50"
-    ImageUrl="https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f"/>
-
-            <components:ProductCard 
-    Grid.Row="1" Grid.Column="0"
-    Title="Carrots"
-    Description="Crunchy and naturally grown carrots"
-    ProductType="Vegetable"
-    Location="Longueuil, QC"
-    Price="$1.80 / lb"
-    ImageUrl="https://upload.wikimedia.org/wikipedia/commons/7/7e/Carrots_of_many_colors.jpg"/>
-
-
-            <components:ProductCard 
-    Grid.Row="1" Grid.Column="1"
-    Title="Milk"
-    Description="Fresh whole milk from local dairy farms"
-    ProductType="Dairy"
-    Location="Quebec, QC"
-    Price="$4.25"
-    ImageUrl="https://upload.wikimedia.org/wikipedia/commons/0/0b/Milk_glass.jpg"/>
-
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <components:ProductCard
+         Name="{Binding name}"
+         Category="{Binding category}"
+         Price="{Binding formattedPrice}"
+         Location="{Binding location}"
+         ImageUrl="{Binding imageUrl}"/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </Grid>
 
-    </VerticalStackLayout>
+       
+
+
 </ContentPage>

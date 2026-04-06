@@ -1,3 +1,7 @@
+
+
+using LeafBucket.Models;
+
 namespace LeafBucket.Components;
 
 
@@ -8,13 +12,8 @@ public partial class ProductCard : ContentView
         InitializeComponent();
     }
 
-    public static readonly BindableProperty TitleProperty =
-    BindableProperty.Create(
-        nameof(Title),
-        typeof(string),
-        typeof(ProductCard),
-        "Default"
-    );
+    public static readonly BindableProperty NameProperty =
+    BindableProperty.Create(nameof(Name), typeof(string), typeof(ProductCard), "");
 
     public static readonly BindableProperty DescriptionProperty =
   BindableProperty.Create(
@@ -25,8 +24,8 @@ public partial class ProductCard : ContentView
   );
 
     // Product Type
-    public static readonly BindableProperty ProductTypeProperty =
-        BindableProperty.Create(nameof(ProductType), typeof(string), typeof(ProductCard), "");
+    public static readonly BindableProperty CategoryProperty =
+    BindableProperty.Create(nameof(Category), typeof(string), typeof(ProductCard), "");
 
     // Image
     public static readonly BindableProperty ImageUrlProperty =
@@ -41,10 +40,10 @@ public partial class ProductCard : ContentView
         BindableProperty.Create(nameof(Price), typeof(string), typeof(ProductCard), "");
 
 
-    public string Title
+    public string Name
     {
-        get => (string)GetValue(TitleProperty);
-        set => SetValue(TitleProperty, value);
+        get => (string)GetValue(NameProperty);
+        set => SetValue(NameProperty, value);
     }
 
     public string Description
@@ -56,10 +55,10 @@ public partial class ProductCard : ContentView
    
 
     // Properties
-    public string ProductType
+    public string Category
     {
-        get => (string)GetValue(ProductTypeProperty);
-        set => SetValue(ProductTypeProperty, value);
+        get => (string)GetValue(CategoryProperty);
+        set => SetValue(CategoryProperty, value);
     }
 
     public string ImageUrl
@@ -83,3 +82,10 @@ public partial class ProductCard : ContentView
 
 
 
+
+
+
+
+
+
+  

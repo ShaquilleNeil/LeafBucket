@@ -3,10 +3,56 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LeafBucket.Views.Farmer.AddProductPage"
              Title="AddProduct">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ScrollView>
+
+        <VerticalStackLayout Padding="20" Spacing="10">
+            <Image x:Name="productImage" HeightRequest="200" BackgroundColor="LightGray"/>
+
+            <Button x:Name="pickImage_Button" Text="Pick Image" Clicked="PickImage_Clicked"/>
+
+            <Label Text="Product Name"/>
+            <Entry x:Name="nameEntry"/>
+            
+            <Label Text="Product Category"/>
+            <Picker x:Name="categoryPicker" Title="Select Category">
+                <Picker.Items>
+                    <x:String>Fresh Produce</x:String>
+                    <x:String>Fruits</x:String>
+                    <x:String>Vegetables</x:String>
+                    <x:String>Dairy</x:String>
+                    <x:String>Eggs</x:String>
+                    <x:String>Meat</x:String>
+                    <x:String>Honey &amp; Preserves</x:String>
+                    <x:String>Herbs &amp; Spices</x:String>
+                    <x:String>Other</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <Label Text="Units"/>
+            <Picker x:Name="unitPicker" Title="Select unit">
+                <Picker.Items>
+                    <x:String>Kg</x:String>
+                    <x:String>Ilbs</x:String>
+                    <x:String>Bunch</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <Label Text="Price"/>
+            <Entry x:Name="priceEntry" Keyboard="Numeric"/>
+
+            <Label Text="Quantity"/>
+            <Entry x:Name="stockEntry" Keyboard="Numeric"/>
+
+            <Label Text="Product Description"/>
+            <Editor x:Name="productDescription"/>
+
+        <Button x:Name="saveProductButton"
+                Text="Save"
+                BackgroundColor="Green"
+                Clicked="saveProduct"/>
+
+
+        </VerticalStackLayout>
+
+    </ScrollView>
 </ContentPage>

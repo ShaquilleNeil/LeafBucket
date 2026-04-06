@@ -79,6 +79,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Components\FarmerProductCard.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="FarmerShell.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

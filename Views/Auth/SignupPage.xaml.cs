@@ -1,6 +1,5 @@
 using LeafBucket.Models;
 using LeafBucket.Services;
-using LeafBucket.ViewModels.Auth;
 
 namespace LeafBucket.Views.Auth;
 
@@ -11,12 +10,12 @@ public partial class SignupPage : ContentPage
 	public SignupPage()
 	{
 		InitializeComponent();
-        BindingContext = new SignupViewModel();
+      
 	}
 
 	private void LoginNavigation(object sender, EventArgs e)
 	{
-		Navigation.PushAsync(new LoginPage());
+		Navigation.PopAsync();
 	}
 
 	private async void SignUpButton_Clicked(object sender, EventArgs e)
@@ -81,7 +80,14 @@ public partial class SignupPage : ContentPage
         return;
     }
 
-    if (password != confirmPassword)
+        if (password.Length < 6)
+        {
+            PasswordErrorLabel.Text = "Password must be at least 6 characters.";
+            PasswordErrorLabel.IsVisible = true;
+            return;
+        }
+
+        if (password != confirmPassword)
     {
         ConfirmPasswordErrorLabel.Text = "Passwords do not match.";
         ConfirmPasswordErrorLabel.IsVisible = true;
@@ -124,7 +130,7 @@ public partial class SignupPage : ContentPage
         Console.WriteLine("Firestore user created.");
 
         await DisplayAlert("Success", "Account created successfully!", "OK");
-        await Navigation.PushAsync(new LoginPage());
+        await Navigation.PopAsync();
     }
     catch (Exception ex)
     {

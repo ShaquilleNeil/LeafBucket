@@ -18,11 +18,15 @@ namespace LeafBucket.Models
         public int stockQuantity { get; set; }
         public string imageUrl { get; set; }
 
+        public string location { get; set; }
+
         public bool isAvailable { get; set; }
 
         public DateTime createdAt { get; set; }
 
 
         public DateTime updatedAt { get; set; }
+
+        public string formattedPrice => $"${price:F2} / {unit}";
     }
 }

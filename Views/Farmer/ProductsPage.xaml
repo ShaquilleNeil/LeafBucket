@@ -1,12 +1,50 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:components="clr-namespace:LeafBucket.Components"
               x:Class="LeafBucket.Views.Farmer.ProductsPage"
              Title="FarmerProducts">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    
+        <ContentPage.ToolbarItems>
+            <ToolbarItem IconImageSource="plus.png" Clicked="AddProduct_Clicked"/>
+        </ContentPage.ToolbarItems>
+
+
+    <Grid RowDefinitions="Auto, *"
+          WidthRequest="400">
+        <Border
+               Grid.Row="0"
+     Stroke="DarkSlateGray"
+     StrokeThickness="2"
+     StrokeShape="RoundRectangle 10"
+     Padding="2"
+     Margin="0,0,0,20"
+               
+     >
+            <SearchBar Placeholder="Search Products..." TextChanged="SearchBar_TextChanged" />
+
+
+        </Border>
+
+        <CollectionView Grid.Row="1" x:Name="FarmerProductsCollection">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="2"/>
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <components:FarmerProductCard
+         Name="{Binding name}"
+         Category="{Binding category}"
+         Price="{Binding formattedPrice}"
+         StockQuantity="{Binding stockQuantity}"
+         ImageUrl="{Binding imageUrl}"/>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+
+
+
+
 </ContentPage>

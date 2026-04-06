@@ -142,7 +142,15 @@ namespace LeafBucket.Services
 
            
 
-
+        public void signOut()
+        {
+            SessionManager.UserId = null;
+            SessionManager.IdToken = null;
+            SecureStorage.Remove("userId");
+            SecureStorage.Remove("idToken");
+            SecureStorage.Remove("role");
+            SecureStorage.Remove("location");
+        }
 
 
 

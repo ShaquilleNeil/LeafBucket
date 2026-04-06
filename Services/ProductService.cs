@@ -28,7 +28,8 @@ namespace LeafBucket.Services
             var userId = SessionManager.UserId;
             var idToken = SessionManager.IdToken;
 
-            var url = $"https://firestore.googleapis.com/v1/projects/{projectId}/databases/(default)/documents/products";
+            var generatedId = Guid.NewGuid().ToString();
+            var url = $"https://firestore.googleapis.com/v1/projects/{projectId}/databases/(default)/documents/products?documentId={generatedId}&key={ApiKey}";
             _httpClient.DefaultRequestHeaders.Clear();
             _httpClient.DefaultRequestHeaders.Authorization =
                 new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", idToken);
@@ -38,7 +39,7 @@ namespace LeafBucket.Services
             {
                 fields = new
                 {
-                    productId = new { stringValue = product.productId },
+                    productId = new { stringValue = generatedId },
                     farmerId = new { stringValue = userId },
                     name = new { stringValue = product.name },
                     description = new { stringValue = product.description },
@@ -47,13 +48,14 @@ namespace LeafBucket.Services
                     unit = new { stringValue = product.unit },
                     stockQuantity = new { integerValue = product.stockQuantity },
                     imageUrl = new { stringValue = product.imageUrl },
+                    location = new { stringValue = SessionManager.Location },
                     isAvailable = new { booleanValue = product.isAvailable },
                     createdAt = new { timestampValue = DateTime.UtcNow.ToString("o") },
                     updatedAt = new { timestampValue = DateTime.UtcNow.ToString("o") }
                 }
             };
 
-            var response = await _httpClient.PostAsJsonAsync($"{url}?key={ApiKey}", body);
+            var response = await _httpClient.PostAsJsonAsync(url, body);
             if (!response.IsSuccessStatusCode)
             {
                 var errorContent = await response.Content.ReadAsStringAsync();
@@ -64,9 +66,9 @@ namespace LeafBucket.Services
 
 
         public async Task updateProduct(Product product) {
-            var userId = SessionManager.UserId;
             var idToken = SessionManager.IdToken;
-            var url = $"https://firestore.googleapis.com/v1/projects/{projectId}/databases/(default)/documents/products/{product.productId}?key={ApiKey}&updateMask.fieldPaths=name&updateMask.fieldPaths=description&updateMask.fieldPaths=category&updateMask.fieldPaths=price&updateMask.fieldPaths=unit&updateMask.fieldPaths=stockQuantity&updateMask.fieldPaths=imageUrl&updateMask.fieldPaths=isAvailable&updateMask.fieldPaths=updatedAt";
+            var location = SessionManager.Location;
+            var url = $"https://firestore.googleapis.com/v1/projects/{projectId}/databases/(default)/documents/products/{product.productId}?key={ApiKey}&updateMask.fieldPaths=name&updateMask.fieldPaths=description&updateMask.fieldPaths=category&updateMask.fieldPaths=price&updateMask.fieldPaths=unit&updateMask.fieldPaths=stockQuantity&updateMask.fieldPaths=imageUrl&updateMask.fieldPaths=location&updateMask.fieldPaths=isAvailable&updateMask.fieldPaths=updatedAt";
 
 
             _httpClient.DefaultRequestHeaders.Clear();
@@ -84,6 +86,7 @@ namespace LeafBucket.Services
                     unit = new { stringValue = product.unit },
                     stockQuantity = new { integerValue = product.stockQuantity },
                     imageUrl = new { stringValue = product.imageUrl },
+                    location = new { stringValue = location },
                     isAvailable = new { booleanValue = product.isAvailable },
                     updatedAt = new { timestampValue = DateTime.UtcNow.ToString("o") }
                 }
@@ -126,10 +129,7 @@ namespace LeafBucket.Services
 
             var url = $"https://firestore.googleapis.com/v1/projects/{projectId}/databases/(default)/documents:runQuery";
 
-            var request = new HttpRequestMessage(HttpMethod.Get, url);
-
-            request.Headers.Authorization =
-              new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", idToken);
+          
 
             var body = new
             {
@@ -186,8 +186,9 @@ namespace LeafBucket.Services
                     category = SafeGet("category"),
                     price = fields.TryGetProperty("price", out var price) ? price.GetProperty("doubleValue").GetDouble() : 0,
                     unit = SafeGet("unit"),
-                    stockQuantity = fields.TryGetProperty("stockQuantity", out var qty) ? qty.GetProperty("integerValue").GetInt32() : 0,
+                    stockQuantity = fields.TryGetProperty("stockQuantity", out var qty) ? int.Parse(qty.GetProperty("integerValue").GetString() ?? "0") : 0,
                     imageUrl = SafeGet("imageUrl"),
+                    location = SafeGet("location"),
                     isAvailable = fields.TryGetProperty("isAvailable", out var avail) && avail.GetProperty("booleanValue").GetBoolean()
                 };
 
@@ -262,8 +263,9 @@ namespace LeafBucket.Services
                     category = SafeGet("category"),
                     price = fields.TryGetProperty("price", out var price) ? price.GetProperty("doubleValue").GetDouble() : 0,
                     unit = SafeGet("unit"),
-                    stockQuantity = fields.TryGetProperty("stockQuantity", out var qty) ? qty.GetProperty("integerValue").GetInt32() : 0,
+                    stockQuantity = fields.TryGetProperty("stockQuantity", out var qty) ? int.Parse(qty.GetProperty("integerValue").GetString() ?? "0") : 0,
                     imageUrl = SafeGet("imageUrl"),
+                    location = SafeGet("location"),
                     isAvailable = fields.TryGetProperty("isAvailable", out var avail) && avail.GetProperty("booleanValue").GetBoolean()
                 };
 
