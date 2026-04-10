@@ -72,6 +72,6 @@ public partial class CartPage : ContentPage
             await DisplayAlert("Empty Cart", "Please add items before checking out.", "OK");
             return;
         }
-        await Navigation.PushAsync(new CheckoutPage());
+        await Navigation.PushAsync(new PaymentMethodPage());
     }
 }

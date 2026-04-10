@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LeafBucket.Views.Customer.OrderConfirmationPage"
+             Title=""
+             NavigationPage.HasNavigationBar="False">
+
+    <Grid RowDefinitions="*, Auto" Padding="24">
+
+        <VerticalStackLayout Grid.Row="0"
+                             VerticalOptions="Center"
+                             HorizontalOptions="Center"
+                             Spacing="16">
+
+            <Frame WidthRequest="80"
+                   HeightRequest="80"
+                   CornerRadius="40"
+                   BorderColor="Black"
+                   HasShadow="False"
+                   HorizontalOptions="Center"
+                   Padding="0">
+                <Label Text="✓"
+                       FontSize="36"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       TextColor="Black"/>
+            </Frame>
+
+        
+            <Label Text="ORDER PLACED!"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"/>
+
+        
+            <Label x:Name="orderId"
+                   FontSize="14"
+                   TextColor="Gray"
+                   HorizontalOptions="Center"/>
+
+        </VerticalStackLayout>
+
+       
+        <VerticalStackLayout Grid.Row="1" Spacing="12">
+
+            <Button Text="VIEW ORDER STATUS"
+                    BackgroundColor="Black"
+                    TextColor="White"
+                    CornerRadius="8"
+                    HeightRequest="50"
+                    Clicked="OnViewOrderStatusClicked"/>
+
+            <Label Text="CONTINUE SHOPPING"
+                   HorizontalOptions="Center"
+                   FontAttributes="Bold"
+                   TextDecorations="Underline">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnContinueShoppingTapped"/>
+                </Label.GestureRecognizers>
+            </Label>
+
+        </VerticalStackLayout>
+
+    </Grid>
+</ContentPage>

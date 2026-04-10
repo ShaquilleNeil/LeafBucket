@@ -12,7 +12,7 @@ namespace LeafBucket.Models
 
         public string customerId { get; set; }
 
-        public string farmerId { get; set; }
+        public List<string> farmerIds { get; set; }
 
         public List<OrderItem> items { get; set; }
 

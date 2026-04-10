@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LeafBucket.Views.Customer.PaymentMethodPage"
+             Title="Payment Method">
+
+    <Grid RowDefinitions="*, Auto" Padding="16">
+
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Spacing="12">
+
+                <Label Text="Select Payment Method"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       Margin="0,8,0,12"/>
+
+                
+                <Frame x:Name="FrameCreditCard"
+                       BorderColor="Black"
+                       CornerRadius="8"
+                       Padding="12"
+                       HasShadow="False">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnPaymentSelected" CommandParameter="CreditCard"/>
+                    </Frame.GestureRecognizers>
+                    <Grid ColumnDefinitions="Auto, *, Auto">
+                        <Label Grid.Column="0" Text="💳" FontSize="22" VerticalOptions="Center"/>
+                        <Label Grid.Column="1" Text="Credit / Debit Card"
+                               FontSize="15" VerticalOptions="Center" Margin="12,0,0,0"/>
+                        <Ellipse x:Name="RadioCreditCard"
+                                 Grid.Column="2"
+                                 WidthRequest="20" HeightRequest="20"
+                                 Stroke="Black" StrokeThickness="2"
+                                 Fill="Black"
+                                 VerticalOptions="Center"/>
+                    </Grid>
+                </Frame>
+
+               
+                <Frame BorderColor="LightGray" CornerRadius="8" Padding="12" HasShadow="False" Opacity="0.5">
+                    <Grid ColumnDefinitions="Auto, *, Auto">
+                        <Label Grid.Column="0" Text="🍎" FontSize="22" VerticalOptions="Center"/>
+                        <Label Grid.Column="1" Text="Apple Pay"
+                               FontSize="15" VerticalOptions="Center" Margin="12,0,0,0" TextColor="Gray"/>
+                        <Ellipse Grid.Column="2"
+                                 WidthRequest="20" HeightRequest="20"
+                                 Stroke="LightGray" StrokeThickness="2"
+                                 Fill="Transparent"
+                                 VerticalOptions="Center"/>
+                    </Grid>
+                </Frame>
+
+               
+                <Frame BorderColor="LightGray" CornerRadius="8" Padding="12" HasShadow="False" Opacity="0.5">
+                    <Grid ColumnDefinitions="Auto, *, Auto">
+                        <Label Grid.Column="0" Text="G" FontSize="22" VerticalOptions="Center" FontAttributes="Bold"/>
+                        <Label Grid.Column="1" Text="Google Pay"
+                               FontSize="15" VerticalOptions="Center" Margin="12,0,0,0" TextColor="Gray"/>
+                        <Ellipse Grid.Column="2"
+                                 WidthRequest="20" HeightRequest="20"
+                                 Stroke="LightGray" StrokeThickness="2"
+                                 Fill="Transparent"
+                                 VerticalOptions="Center"/>
+                    </Grid>
+                </Frame>
+
+              
+                <Frame BorderColor="LightGray" CornerRadius="8" Padding="12" HasShadow="False" Opacity="0.5">
+                    <Grid ColumnDefinitions="Auto, *, Auto">
+                        <Label Grid.Column="0" Text="💵" FontSize="22" VerticalOptions="Center"/>
+                        <Label Grid.Column="1" Text="Cash on Delivery"
+                               FontSize="15" VerticalOptions="Center" Margin="12,0,0,0" TextColor="Gray"/>
+                        <Ellipse Grid.Column="2"
+                                 WidthRequest="20" HeightRequest="20"
+                                 Stroke="LightGray" StrokeThickness="2"
+                                 Fill="Transparent"
+                                 VerticalOptions="Center"/>
+                    </Grid>
+                </Frame>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Button Grid.Row="1"
+                Text="CONTINUE"
+                BackgroundColor="Black"
+                TextColor="White"
+                CornerRadius="8"
+                HeightRequest="50"
+                Margin="0,12,0,0"
+                Clicked="OnContinueClicked"/>
+
+    </Grid>
+</ContentPage>

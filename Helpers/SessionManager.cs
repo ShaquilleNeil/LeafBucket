@@ -12,6 +12,8 @@ namespace LeafBucket.Helpers
         public static string? IdToken { get; set; }
 
         public static string Location { get; set; }
+
+        public static string UserName { get; set; }
     }
 }
 

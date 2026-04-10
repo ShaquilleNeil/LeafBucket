@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LeafBucket.Views.Customer.OrderSummaryPage"
+             Title="Order Summary">
+
+    <Grid RowDefinitions="*, Auto" Padding="16">
+
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Spacing="16">
+
+               
+                <Label Text="SHIPPING ADDRESS"
+                       FontSize="12"
+                       TextColor="Gray"
+                       FontAttributes="Bold"/>
+                <Frame BorderColor="LightGray" CornerRadius="8" Padding="12" HasShadow="False">
+                    <VerticalStackLayout>
+                        <Label x:Name="Name" FontAttributes="Bold" FontSize="15"/>
+                        <Label x:Name="Address" FontSize="14" TextColor="Gray"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+               
+                <Label Text="PAYMENT METHOD"
+                       FontSize="12"
+                       TextColor="Gray"
+                       FontAttributes="Bold"/>
+                <Frame BorderColor="LightGray" CornerRadius="8" Padding="12" HasShadow="False">
+                    <Grid ColumnDefinitions="*, Auto">
+                        <Label x:Name="paymentMethod" FontSize="14" VerticalOptions="Center"/>
+                        <Label Grid.Column="1" Text="Edit"
+                               TextColor="Black"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnEditPaymentTapped"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+                </Frame>
+
+                <Label Text="ITEMS"
+                       FontSize="12"
+                       TextColor="Gray"
+                       FontAttributes="Bold"/>
+                <CollectionView x:Name="ItemsCollection">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="*, Auto" Padding="0,8">
+                                <VerticalStackLayout Grid.Column="0">
+                                    <Label Text="{Binding name}" FontSize="14" FontAttributes="Bold"/>
+                                    <Label Text="{Binding quantity, StringFormat='Qty: {0}'}"
+                                           FontSize="12" TextColor="Gray"/>
+                                </VerticalStackLayout>
+                                <Label Grid.Column="1"
+                                       FontSize="14"
+                                       VerticalOptions="Center">
+                                    <Label.Text>
+                                        <MultiBinding StringFormat="${0:F2}">
+                                            <Binding Path="price"/>
+                                        </MultiBinding>
+                                    </Label.Text>
+                                </Label>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+               
+                <BoxView HeightRequest="1" Color="LightGray"/>
+
+               
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label Grid.Column="0" Text="Subtotal" FontSize="14" TextColor="Gray"/>
+                    <Label Grid.Column="1" x:Name="subtotal" FontSize="14" TextColor="Gray"/>
+                </Grid>
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label Grid.Column="0" Text="Delivery Fee" FontSize="14" TextColor="Gray"/>
+                    <Label Grid.Column="1" x:Name="deliveryFee" FontSize="14" TextColor="Gray"/>
+                </Grid>
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label Grid.Column="0" Text="Taxes (Estimated)" FontSize="14" TextColor="Gray"/>
+                    <Label Grid.Column="1" x:Name="tax" FontSize="14" TextColor="Gray"/>
+                </Grid>
+
+                
+                <BoxView HeightRequest="1" Color="LightGray"/>
+
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label Grid.Column="0" Text="Grand Total"
+                           FontSize="16" FontAttributes="Bold"/>
+                    <Label Grid.Column="1" x:Name="grandTotal"
+                           FontSize="16" FontAttributes="Bold"/>
+                </Grid>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        
+        <Button Grid.Row="1"
+                Text="PLACE ORDER"
+                BackgroundColor="Black"
+                TextColor="White"
+                CornerRadius="8"
+                HeightRequest="50"
+                Margin="0,12,0,0"
+                Clicked="OnPlaceOrderClicked"/>
+
+    </Grid>
+</ContentPage>

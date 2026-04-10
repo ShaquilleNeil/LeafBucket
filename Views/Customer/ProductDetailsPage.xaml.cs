@@ -48,7 +48,8 @@ public partial class ProductDetailsPage : ContentPage
             quantity = _quantity,
             imageUrl = _product.imageUrl,
             unit = _product.unit,
-            stockQuantity = _product.stockQuantity
+            stockQuantity = _product.stockQuantity,
+            farmerId = _product.farmerId
         };
         CartManager.AddItem(cartItem);
         await DisplayAlert("Success", "Product added to cart!", "OK");

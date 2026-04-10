@@ -23,7 +23,8 @@ namespace LeafBucket.Services
         }
 
 
-        public async Task placeOrder(Order order) {
+        public async Task placeOrder(Order order)
+        {
             var userId = SessionManager.UserId;
             var idToken = SessionManager.IdToken;
 
@@ -38,7 +39,13 @@ namespace LeafBucket.Services
                 {
                     orderId = new { stringValue = order.orderId },
                     customerId = new { stringValue = userId },
-                    farmerId = new { stringValue = order.farmerId },
+                    farmerId = new
+                    {
+                        arrayValue = new
+                        {
+                            values = order.farmerIds.Select(id => new { stringValue = id }).ToArray()
+                        }
+                    },
                     items = new
                     {
                         arrayValue = new
@@ -50,7 +57,9 @@ namespace LeafBucket.Services
                                     fields = new
                                     {
                                         productId = new { stringValue = item.productId },
-                                        quantity = new { integerValue = item.quantity },
+                                        name = new { stringValue = item.name },
+                                        farmerId = new { stringValue = item.farmerId },
+                                        quantity = new { integerValue = item.quantity.ToString() },
                                         price = new { doubleValue = item.price }
                                     }
                                 }
@@ -69,13 +78,15 @@ namespace LeafBucket.Services
                 }
             };
 
+            var bodyJson = System.Text.Json.JsonSerializer.Serialize(body);
+            Console.WriteLine($"Request body: {bodyJson}");
+
             var response = await _httpClient.PostAsJsonAsync($"{url}?key={ApiKey}", body);
             if (!response.IsSuccessStatusCode)
             {
                 var errorContent = await response.Content.ReadAsStringAsync();
                 throw new Exception($"Error placing order: {errorContent}");
             }
-
         }
 
         public async Task updateOrderStatus(string orderId, string status) {
@@ -127,7 +138,7 @@ namespace LeafBucket.Services
                         fieldFilter = new
                         {
                             field = new { fieldPath = "farmerId" },
-                            op = "EQUAL",
+                            op = "ARRAY_CONTAINS",
                             value = new { stringValue = userId }
                         }
                     }
@@ -154,7 +165,12 @@ namespace LeafBucket.Services
                     var order = new Order
                     {
                         orderId = document.GetProperty("name").GetString()?.Split('/').Last() ?? "",
-                        farmerId = fields.GetProperty("farmerId").GetProperty("stringValue").GetString(),
+                        farmerIds = fields.GetProperty("farmerId")
+                                    .GetProperty("arrayValue")
+                                    .GetProperty("values")
+                                    .EnumerateArray()
+                                    .Select(f => f.GetProperty("stringValue").GetString())
+                                    .ToList(),
                         customerId = fields.GetProperty("customerId").GetProperty("stringValue").GetString(),
                         shippingAddress = fields.GetProperty("shippingAddress").GetProperty("stringValue").GetString(),
                         paymentMethod = fields.GetProperty("paymentMethod").GetProperty("stringValue").GetString(),
@@ -230,7 +246,12 @@ namespace LeafBucket.Services
                     var order = new Order
                     {
                         orderId = document.GetProperty("name").GetString()?.Split('/').Last() ?? "",
-                        farmerId = fields.GetProperty("farmerId").GetProperty("stringValue").GetString(),
+                        farmerIds = fields.GetProperty("farmerId")
+                                    .GetProperty("arrayValue")
+                                    .GetProperty("values")
+                                    .EnumerateArray()
+                                    .Select(f => f.GetProperty("stringValue").GetString())
+                                    .ToList(),
                         customerId = fields.GetProperty("customerId").GetProperty("stringValue").GetString(),
                         shippingAddress = fields.GetProperty("shippingAddress").GetProperty("stringValue").GetString(),
                         paymentMethod = fields.GetProperty("paymentMethod").GetProperty("stringValue").GetString(),

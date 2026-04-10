@@ -71,11 +71,13 @@ public partial class LoginPage : ContentPage
             SessionManager.Location = user.address;
             SessionManager.UserId = auth.localId;
             SessionManager.IdToken = auth.idToken;
+            SessionManager.UserName = user.firstName + " " + user.lastName;
 
             await SecureStorage.SetAsync("userId", auth.localId);
             await SecureStorage.SetAsync("idToken", auth.idToken);
             await SecureStorage.SetAsync("role", user.role);
             await SecureStorage.SetAsync("location", user.address);
+            await SecureStorage.SetAsync("userName", user.firstName + " " + user.lastName);
 
             if (user.role == "Customer")
     Application.Current.MainPage = new AppShell();
