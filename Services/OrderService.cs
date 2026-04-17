@@ -126,7 +126,9 @@ namespace LeafBucket.Services
 
             var url = $"https://firestore.googleapis.com/v1/projects/{projectId}/databases/(default)/documents:runQuery";
 
-  
+            _httpClient.DefaultRequestHeaders.Clear();
+            _httpClient.DefaultRequestHeaders.Authorization =
+                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", idToken);
 
             var body = new
             {
@@ -175,10 +177,13 @@ namespace LeafBucket.Services
                         shippingAddress = fields.GetProperty("shippingAddress").GetProperty("stringValue").GetString(),
                         paymentMethod = fields.GetProperty("paymentMethod").GetProperty("stringValue").GetString(),
                         status = fields.GetProperty("status").GetProperty("stringValue").GetString(),
-                        subtotal = fields.GetProperty("subtotal").GetProperty("doubleValue").GetDouble(),
-                        deliveryFee = fields.GetProperty("deliveryFee").GetProperty("doubleValue").GetDouble(),
-                        tax = fields.GetProperty("tax").GetProperty("doubleValue").GetDouble(),
-                        total = fields.GetProperty("total").GetProperty("doubleValue").GetDouble(),
+                        subtotal = ParseDouble(fields.GetProperty("subtotal")),
+                        deliveryFee = ParseDouble(fields.GetProperty("deliveryFee")),
+                        tax = ParseDouble(fields.GetProperty("tax")),
+                        total = ParseDouble(fields.GetProperty("total")),
+                        createdAt = DateTime.TryParse(
+        fields.GetProperty("createdAt").GetProperty("timestampValue").GetString(),
+        out var parsedDate) ? parsedDate : DateTime.UtcNow,
                         items = fields.GetProperty("items")
                             .GetProperty("arrayValue")
                             .GetProperty("values")
@@ -186,7 +191,11 @@ namespace LeafBucket.Services
                             .Select(item => new OrderItem
                             {
                                 productId = item.GetProperty("mapValue").GetProperty("fields").GetProperty("productId").GetProperty("stringValue").GetString(),
-                                quantity = item.GetProperty("mapValue").GetProperty("fields").GetProperty("quantity").GetProperty("integerValue").GetInt32(),
+                                quantity = int.Parse(item.GetProperty("mapValue")
+                                                .GetProperty("fields")
+                                                .GetProperty("quantity")
+                                                .GetProperty("integerValue")
+                                                .GetString() ?? "0"),
                                 price = item.GetProperty("mapValue").GetProperty("fields").GetProperty("price").GetProperty("doubleValue").GetDouble()
                             }).ToList()
                     };
@@ -207,7 +216,9 @@ namespace LeafBucket.Services
 
             var url = $"https://firestore.googleapis.com/v1/projects/{projectId}/databases/(default)/documents:runQuery";
 
-
+            _httpClient.DefaultRequestHeaders.Clear();
+            _httpClient.DefaultRequestHeaders.Authorization =
+                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", idToken);
 
             var body = new
             {
@@ -256,10 +267,13 @@ namespace LeafBucket.Services
                         shippingAddress = fields.GetProperty("shippingAddress").GetProperty("stringValue").GetString(),
                         paymentMethod = fields.GetProperty("paymentMethod").GetProperty("stringValue").GetString(),
                         status = fields.GetProperty("status").GetProperty("stringValue").GetString(),
-                        subtotal = fields.GetProperty("subtotal").GetProperty("doubleValue").GetDouble(),
-                        deliveryFee = fields.GetProperty("deliveryFee").GetProperty("doubleValue").GetDouble(),
-                        tax = fields.GetProperty("tax").GetProperty("doubleValue").GetDouble(),
-                        total = fields.GetProperty("total").GetProperty("doubleValue").GetDouble(),
+                        subtotal = ParseDouble(fields.GetProperty("subtotal")),
+                        deliveryFee = ParseDouble(fields.GetProperty("deliveryFee")),
+                        tax = ParseDouble(fields.GetProperty("tax")),
+                        total = ParseDouble(fields.GetProperty("total")),
+                        createdAt = DateTime.TryParse(
+        fields.GetProperty("createdAt").GetProperty("timestampValue").GetString(),
+        out var parsedDate) ? parsedDate : DateTime.UtcNow,
                         items = fields.GetProperty("items")
                             .GetProperty("arrayValue")
                             .GetProperty("values")
@@ -267,7 +281,11 @@ namespace LeafBucket.Services
                             .Select(item => new OrderItem
                             {
                                 productId = item.GetProperty("mapValue").GetProperty("fields").GetProperty("productId").GetProperty("stringValue").GetString(),
-                                quantity = item.GetProperty("mapValue").GetProperty("fields").GetProperty("quantity").GetProperty("integerValue").GetInt32(),
+                                quantity = int.Parse(item.GetProperty("mapValue")
+                                                .GetProperty("fields")
+                                                .GetProperty("quantity")
+                                                .GetProperty("integerValue")
+                                                .GetString() ?? "0"),
                                 price = item.GetProperty("mapValue").GetProperty("fields").GetProperty("price").GetProperty("doubleValue").GetDouble()
                             }).ToList()
                     };
@@ -277,6 +295,16 @@ namespace LeafBucket.Services
 
             return orders;
         }
+
+        private double ParseDouble(JsonElement element)
+        {
+            if (element.TryGetProperty("doubleValue", out var d))
+                return d.GetDouble();
+            if (element.TryGetProperty("integerValue", out var i))
+                return double.Parse(i.GetString() ?? "0");
+            return 0;
+        }
+
 
     }
 }

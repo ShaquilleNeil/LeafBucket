@@ -33,6 +33,26 @@ namespace LeafBucket.Models
 
         public DateTime updatedAt { get; set; }
 
+        public string ShortOrderId => orderId?.Length >= 8
+    ? $"Order #{orderId[..8].ToUpper()}"
+    : $"Order #{orderId?.ToUpper() ?? "??????"}";
 
+        public string FormattedDate => createdAt != DateTime.MinValue
+            ? createdAt.ToString("MMM d, yyyy")
+            : "Date unavailable";
+
+        public string ItemSummary => items != null
+            ? $"{items.Count} item{(items.Count > 1 ? "s" : "")} · ${total:0.00}"
+            : "0 items";
+
+        public string StatusColor => status switch
+        {
+            "Placed" => "#1565C0",
+            "Preparing" => "#E65100",
+            "Ready" => "#558B2F",
+            "Completed" => "#757575",
+            "Cancelled" => "#C62828",
+            _ => "#9E9E9E"
+        };
     }
 }

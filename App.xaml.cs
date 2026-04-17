@@ -26,11 +26,11 @@ public partial class App : Application
             if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(idToken) || string.IsNullOrEmpty(role))
                 return;
 
-            // Check if token is expired (Firebase tokens last 1 hour)
+           
             if (IsTokenExpired(idToken))
             {
                 SecureStorage.RemoveAll();
-                return; // sends user to login
+                return; 
             }
 
             SessionManager.UserId = userId;

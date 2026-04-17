@@ -3,42 +3,37 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:components="clr-namespace:LeafBucket.Components"
              x:Class="LeafBucket.Views.Customer.OrdersPage"
-             Title="Orders">
-    <VerticalStackLayout
-        Padding="10"
-        >
+             Title="My Orders"
+             BackgroundColor="#F5F5F0">
 
+    <RefreshView x:Name="refreshView" Refreshing="OnRefreshing">
+        <ScrollView>
+            <StackLayout Padding="8" Spacing="4">
 
-        <components:OrderCard
-    OrderId="Order #1028"
-    Status="Preparing"
-    Summary="2 Items - Eggs, Milk"
-    Date="March 27th, 2026"/>
+            
+                <StackLayout x:Name="emptyState" IsVisible="False"
+                             HorizontalOptions="Center" Margin="0,80,0,0" Spacing="12">
+                    <Label Text="🛍️" FontSize="48" HorizontalOptions="Center"/>
+                    <Label Text="No orders yet" FontSize="18" FontAttributes="Bold"
+                           HorizontalOptions="Center" TextColor="#333"/>
+                    <Label Text="Your past orders will appear here."
+                           FontSize="14" TextColor="#888" HorizontalOptions="Center"/>
+                </StackLayout>
 
-        <components:OrderCard
-    OrderId="Order #1027"
-    Status="Shipped"
-    Summary="4 Items - Carrots, Bananas, Milk, Eggs"
-    Date="March 26th, 2026"/>
+                <StackLayout x:Name="ordersStack" Spacing="0">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <components:OrderCard
+                                Order="{Binding .}"
+                                OrderId="{Binding ShortOrderId}"
+                                Date="{Binding FormattedDate}"
+                                Status="{Binding status}"
+                                Summary="{Binding ItemSummary}"/>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
 
-        <components:OrderCard
-    OrderId="Order #1026"
-    Status="Cancelled"
-    Summary="1 Item - Strawberries"
-    Date="March 25th, 2026"/>
-
-        <components:OrderCard
-    OrderId="Order #1025"
-    Status="Processing"
-    Summary="3 Items - Lettuce, Tomatoes, Cucumbers"
-    Date="March 24th, 2026"/>
-
-        <components:OrderCard
-    OrderId="Order #1024"
-    Status="Preparing"
-    Summary="5 Items - Apples, Bananas, Milk, Eggs, Carrots"
-    Date="March 23rd, 2026"/>
-
-
-    </VerticalStackLayout>
+            </StackLayout>
+        </ScrollView>
+    </RefreshView>
 </ContentPage>

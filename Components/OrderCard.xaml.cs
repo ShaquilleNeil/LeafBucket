@@ -1,3 +1,4 @@
+using LeafBucket.Models;
 using LeafBucket.Views.Customer;
 
 namespace LeafBucket.Components;
@@ -44,10 +45,24 @@ public partial class OrderCard : ContentView
         get => (string)GetValue(DateProperty);
         set => SetValue(DateProperty, value);
     }
+    public static readonly BindableProperty OrderProperty =
+    BindableProperty.Create(nameof(Order), typeof(Order), typeof(OrderCard), default(Order));
+
+    public Order? Order
+    {
+        get => (Order?)GetValue(OrderProperty);
+        set => SetValue(OrderProperty, value);
+    }
+
+
 
     private async void OnCardTapped(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("orderdetails");
+        if (Order == null) return;
 
+        await Shell.Current.GoToAsync("orderdetails", new Dictionary<string, object>
+    {
+        { "Order", Order }
+    });
     }
 }
