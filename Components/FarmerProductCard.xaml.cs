@@ -1,7 +1,13 @@
+using LeafBucket.Models;
+using LeafBucket.Services;
+using LeafBucket.Views.Farmer;
+
 namespace LeafBucket.Components;
 
 public partial class FarmerProductCard : ContentView
 {
+
+    private Product product = new Product();
 	public FarmerProductCard()
 	{
 		InitializeComponent();
@@ -27,6 +33,16 @@ public partial class FarmerProductCard : ContentView
         BindableProperty.Create(nameof(StockQuantity), typeof(int), typeof(FarmerProductCard), 0);
 
 
+    public static readonly BindableProperty ProductProperty =
+    BindableProperty.Create(nameof(Product), typeof(Product), typeof(FarmerProductCard), default(Product));
+
+    public Product? Product
+    {
+        get => (Product?)GetValue(ProductProperty);
+        set => SetValue(ProductProperty, value);
+    }
+
+
     public string Name
     {
         get => (string)GetValue(NameProperty);
@@ -35,7 +51,7 @@ public partial class FarmerProductCard : ContentView
 
 
 
-    // Properties
+
     public string Category
     {
         get => (string)GetValue(CategoryProperty);
@@ -59,6 +75,33 @@ public partial class FarmerProductCard : ContentView
     {
         get => (string)GetValue(PriceProperty);
         set => SetValue(PriceProperty, value);
+    }
+
+
+    public async void updateProduct(object sender, EventArgs e)
+    {
+        if (Product == null) return;
+        await Navigation.PushAsync(new EditProductPage(Product));
+    }
+
+
+    public async void deleteProduct(object sender, EventArgs e)
+    {
+        if (Product == null) return;
+        bool confirm = await Application.Current.MainPage.DisplayAlert(
+            "Delete", $"Delete {Product.name}?", "Yes", "No");
+        if (!confirm) return;
+
+        try
+        {
+            var service = new ProductService();
+            await service.deleteProduct(Product);
+            MessagingCenter.Send(this, "ProductDeleted");
+        }
+        catch (Exception ex)
+        {
+            await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+        }
     }
 
 

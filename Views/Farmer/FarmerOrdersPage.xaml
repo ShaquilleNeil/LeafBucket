@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:components="clr-namespace:LeafBucket.Components"
+             x:Class="LeafBucket.Views.Farmer.FarmerOrdersPage"
+             Title=""
+             BackgroundColor="#F5F5F0">
+
+    <RefreshView x:Name="refreshView" Refreshing="OnRefreshing">
+        <ScrollView>
+            <StackLayout Padding="16" Spacing="12">
+
+              
+                <Label Text="LEAF BUCKET" FontSize="22"
+                       FontAttributes="Bold" TextColor="#2E7D32"/>
+                <Label Text="Orders Management" FontSize="14"
+                       TextColor="#888" Margin="0,-10,0,0"/>
+
+
+                <Border
+                              Grid.Row="0"
+                    Stroke="DarkSlateGray"
+                    StrokeThickness="2"
+                    StrokeShape="RoundRectangle 10"
+                    Padding="2"
+                    Margin="0,0,0,20"
+          
+                    >
+                    <SearchBar Placeholder="Search Products..." TextChanged="OnSearchChanged" />
+
+
+                </Border>
+
+
+                <StackLayout x:Name="emptyState" IsVisible="False"
+                             HorizontalOptions="Center" Margin="0,60,0,0" Spacing="12">
+                    <Label Text="📋" FontSize="48" HorizontalOptions="Center"/>
+                    <Label Text="No orders yet" FontSize="18"
+                           FontAttributes="Bold" HorizontalOptions="Center" TextColor="#333"/>
+                    <Label Text="Incoming orders will appear here."
+                           FontSize="14" TextColor="#888" HorizontalOptions="Center"/>
+                </StackLayout>
+
+
+                <StackLayout x:Name="ordersStack" Spacing="12">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <components:FarmerOrderCard
+                Order="{Binding .}"
+                OrderId="{Binding ShortOrderId}"
+                Date="{Binding FormattedDate}"
+                Status="{Binding status}"
+                Summary="{Binding ItemSummary}"
+                Total="{Binding FormattedTotal}"/>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+
+            </StackLayout>
+        </ScrollView>
+    </RefreshView>
+</ContentPage>

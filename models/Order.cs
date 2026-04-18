@@ -44,12 +44,12 @@ namespace LeafBucket.Models
         public string ItemSummary => items != null
             ? $"{items.Count} item{(items.Count > 1 ? "s" : "")} · ${total:0.00}"
             : "0 items";
-
+        public string FormattedTotal => $"${total:0.00}";
         public string StatusColor => status switch
         {
             "Placed" => "#1565C0",
             "Preparing" => "#E65100",
-            "Ready" => "#558B2F",
+            "Shipped" => "#558B2F",
             "Completed" => "#757575",
             "Cancelled" => "#C62828",
             _ => "#9E9E9E"

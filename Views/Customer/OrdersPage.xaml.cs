@@ -44,8 +44,7 @@ public partial class OrdersPage : ContentPage
 
         }
         catch (Exception ex) {
-            Console.WriteLine($"FULL ERROR: {ex.Message}");
-            Console.WriteLine($"STACK TRACE: {ex.StackTrace}");
+            
             await DisplayAlert("Error", $"Failed to load orders: {ex.Message}", "OK");
         }
     }

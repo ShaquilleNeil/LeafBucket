@@ -6,26 +6,23 @@
 
     <Border StrokeShape = "RoundRectangle 10" Padding="10" WidthRequest="190">
         <VerticalStackLayout>
-            <!-- Product Image -->
+            
             <Image
              Source = "{Binding ImageUrl, Source={x:Reference self}}"
              HeightRequest="120"
              Aspect="AspectFill"/>
 
-            <!-- Product Type -->
             <Label
              Text = "{Binding Category, Source={x:Reference self}}"
              FontSize="12"
              TextColor="Gray"/>
 
-            <!-- Title -->
             <Label
              Text = "{Binding Name, Source={x:Reference self}}"
              FontAttributes="Bold"
              FontSize="16"/>
 
 
-            <!-- Price -->
             <Label
              Text = "{Binding Price, Source={x:Reference self}}"
              FontSize="14"
@@ -43,13 +40,15 @@
              Text = "Update"
              BackgroundColor="Blue"
              TextColor="White"
+             Clicked="updateProduct"
              CornerRadius="8"/>
 
             <Button
               Text = "Delete"
               BackgroundColor="Red"
               TextColor="White"
-              CornerRadius="8"/>
+              CornerRadius="8"
+                Clicked="deleteProduct"/>
         </VerticalStackLayout>
     </Border>
 </ContentView>

@@ -77,9 +77,15 @@
 	  <Compile Update="Views\Farmer\FarmerOrderDetailsPage.xaml.cs">
 	    <DependentUpon>FarmerOrderDetailsPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\Farmer\FarmerOrdersPage.xaml.cs">
+	    <DependentUpon>FarmerOrdersPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Components\FarmerOrderCard.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Components\FarmerProductCard.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

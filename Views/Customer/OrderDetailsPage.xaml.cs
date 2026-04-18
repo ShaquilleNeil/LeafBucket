@@ -114,8 +114,8 @@ public partial class OrderDetailsPage : ContentPage
         var inactive = Color.FromArgb("#E0E0E0");
 
         stepPlaced.Color = active;
-        stepPreparing.Color = status is "Preparing" or "Ready" or "Completed" ? active : inactive;
-        stepReady.Color = status is "Ready" or "Completed" ? active : inactive;
+        stepPreparing.Color = status is "Preparing" or "Shipped" or "Completed" ? active : inactive;
+        stepShipped.Color = status is "Shipped" or "Completed" ? active : inactive;
         stepCompleted.Color = status == "Completed" ? active : inactive;
     }
 }

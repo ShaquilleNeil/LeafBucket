@@ -34,11 +34,12 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <components:FarmerProductCard
-         Name="{Binding name}"
-         Category="{Binding category}"
-         Price="{Binding formattedPrice}"
-         StockQuantity="{Binding stockQuantity}"
-         ImageUrl="{Binding imageUrl}"/>
+    Product="{Binding .}"
+    Name="{Binding name}"
+    Category="{Binding category}"
+    Price="{Binding formattedPrice}"
+    StockQuantity="{Binding stockQuantity}"
+    ImageUrl="{Binding imageUrl}"/>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

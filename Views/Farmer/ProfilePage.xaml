@@ -2,11 +2,113 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LeafBucket.Views.Farmer.ProfilePage"
-             Title="FarmerProfile">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title=""
+             BackgroundColor="#F5F5F0">
+
+    <ScrollView>
+        <StackLayout Padding="16" Spacing="16">
+
+           
+            <Label Text="LEAF BUCKET" FontSize="22"
+                   FontAttributes="Bold" TextColor="#2E7D32"
+                   HorizontalOptions="Center"/>
+
+            <StackLayout HorizontalOptions="Center" Spacing="8">
+                <Frame WidthRequest="100" HeightRequest="100"
+                       CornerRadius="50" Padding="0"
+                       HasShadow="True" BorderColor="#C8E6C9"
+                       IsClippedToBounds="True"
+                       HorizontalOptions="Center">
+                    <Image x:Name="profilePhoto"
+                           Aspect="AspectFill"
+                           WidthRequest="100"
+                           HeightRequest="100"/>
+                </Frame>
+                <Button Text="Change Photo"
+                        BackgroundColor="Transparent"
+                        TextColor="#2E7D32"
+                        FontSize="13"
+                        Clicked="OnChangePhotoClicked"/>
+            </StackLayout>
+
+           
+            <Label x:Name="farmerNameLabel"
+                   FontSize="20" FontAttributes="Bold"
+                   TextColor="#222" HorizontalOptions="Center"/>
+            <Label Text="Farm Owner" FontSize="13"
+                   TextColor="#888" HorizontalOptions="Center"
+                   Margin="0,-10,0,0"/>
+
+            
+            <Frame Padding="16" CornerRadius="12"
+                   HasShadow="True" BackgroundColor="White">
+                <StackLayout Spacing="12">
+
+                   
+                    <StackLayout Spacing="4">
+                        <Label Text="FARM NAME" FontSize="11"
+                               FontAttributes="Bold" TextColor="#888"
+                               CharacterSpacing="1.5"/>
+                        <Frame Padding="12,10" CornerRadius="8"
+                               HasShadow="False" BackgroundColor="#F5F5F0"
+                               BorderColor="#E0E0E0">
+                            <Label x:Name="farmNameLabel"
+                                   FontSize="14" TextColor="#333"/>
+                        </Frame>
+                    </StackLayout>
+
+                    <StackLayout Spacing="4">
+                        <Label Text="LOCATION" FontSize="11"
+                               FontAttributes="Bold" TextColor="#888"
+                               CharacterSpacing="1.5"/>
+                        <Frame Padding="12,10" CornerRadius="8"
+                               HasShadow="False" BackgroundColor="#F5F5F0"
+                               BorderColor="#E0E0E0">
+                            <Label x:Name="locationLabel"
+                                   FontSize="14" TextColor="#333"/>
+                        </Frame>
+                    </StackLayout>
+
+                 
+                    <StackLayout Spacing="4">
+                        <Label Text="CONTACT INFO" FontSize="11"
+                               FontAttributes="Bold" TextColor="#888"
+                               CharacterSpacing="1.5"/>
+                        <Frame Padding="12,10" CornerRadius="8"
+                               HasShadow="False" BackgroundColor="#F5F5F0"
+                               BorderColor="#E0E0E0">
+                            <StackLayout Spacing="4">
+                                <Label x:Name="phoneLabel"
+                                       FontSize="14" TextColor="#333"/>
+                                <Label x:Name="emailLabel"
+                                       FontSize="14" TextColor="#333"/>
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+
+                </StackLayout>
+            </Frame>
+
+           
+            <Button Text="EDIT PROFILE"
+                    BackgroundColor="White"
+                    TextColor="#2E7D32"
+                    BorderColor="#2E7D32"
+                    BorderWidth="1.5"
+                    CornerRadius="10"
+                    FontSize="14"
+                    FontAttributes="Bold"
+                    Clicked="OnEditProfileClicked"/>
+
+           
+            <Button Text="LOGOUT"
+                    BackgroundColor="#C62828"
+                    TextColor="White"
+                    CornerRadius="10"
+                    FontSize="14"
+                    FontAttributes="Bold"
+                    Clicked="OnLogoutClicked"/>
+
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

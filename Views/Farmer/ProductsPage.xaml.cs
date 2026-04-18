@@ -1,5 +1,6 @@
-using LeafBucket.Services;
+using LeafBucket.Components;
 using LeafBucket.Models;
+using LeafBucket.Services;
 
 namespace LeafBucket.Views.Farmer;
 
@@ -11,8 +12,14 @@ public partial class ProductsPage : ContentPage
     public ProductsPage()
 	{
 		InitializeComponent();
-        
-	}
+        MessagingCenter.Subscribe<FarmerProductCard>(this, "ProductDeleted", async (sender) =>
+        {
+            _allProducts = await productService.fetchFarmerProducts();
+            FarmerProductsCollection.ItemsSource = _allProducts;
+        });
+
+
+    }
 
 	public void SearchBar_TextChanged(object sender, TextChangedEventArgs e) {
 	

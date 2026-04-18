@@ -185,19 +185,23 @@ namespace LeafBucket.Services
         fields.GetProperty("createdAt").GetProperty("timestampValue").GetString(),
         out var parsedDate) ? parsedDate : DateTime.UtcNow,
                         items = fields.GetProperty("items")
-                            .GetProperty("arrayValue")
-                            .GetProperty("values")
-                            .EnumerateArray()
-                            .Select(item => new OrderItem
-                            {
-                                productId = item.GetProperty("mapValue").GetProperty("fields").GetProperty("productId").GetProperty("stringValue").GetString(),
-                                quantity = int.Parse(item.GetProperty("mapValue")
-                                                .GetProperty("fields")
-                                                .GetProperty("quantity")
-                                                .GetProperty("integerValue")
-                                                .GetString() ?? "0"),
-                                price = item.GetProperty("mapValue").GetProperty("fields").GetProperty("price").GetProperty("doubleValue").GetDouble()
-                            }).ToList()
+    .GetProperty("arrayValue")
+    .GetProperty("values")
+    .EnumerateArray()
+    .Select(item => new OrderItem
+    {
+        productId = item.GetProperty("mapValue").GetProperty("fields")
+                        .GetProperty("productId").GetProperty("stringValue").GetString(),
+        name = item.GetProperty("mapValue").GetProperty("fields")
+                    .GetProperty("name").GetProperty("stringValue").GetString(),
+        farmerId = item.GetProperty("mapValue").GetProperty("fields")
+                       .GetProperty("farmerId").GetProperty("stringValue").GetString(),
+        quantity = int.Parse(item.GetProperty("mapValue").GetProperty("fields")
+                        .GetProperty("quantity").GetProperty("integerValue")
+                        .GetString() ?? "0"),
+        price = item.GetProperty("mapValue").GetProperty("fields")
+                    .GetProperty("price").GetProperty("doubleValue").GetDouble()
+    }).ToList()
                     };
                     orders.Add(order);
                 }
@@ -275,19 +279,23 @@ namespace LeafBucket.Services
         fields.GetProperty("createdAt").GetProperty("timestampValue").GetString(),
         out var parsedDate) ? parsedDate : DateTime.UtcNow,
                         items = fields.GetProperty("items")
-                            .GetProperty("arrayValue")
-                            .GetProperty("values")
-                            .EnumerateArray()
-                            .Select(item => new OrderItem
-                            {
-                                productId = item.GetProperty("mapValue").GetProperty("fields").GetProperty("productId").GetProperty("stringValue").GetString(),
-                                quantity = int.Parse(item.GetProperty("mapValue")
-                                                .GetProperty("fields")
-                                                .GetProperty("quantity")
-                                                .GetProperty("integerValue")
-                                                .GetString() ?? "0"),
-                                price = item.GetProperty("mapValue").GetProperty("fields").GetProperty("price").GetProperty("doubleValue").GetDouble()
-                            }).ToList()
+    .GetProperty("arrayValue")
+    .GetProperty("values")
+    .EnumerateArray()
+    .Select(item => new OrderItem
+    {
+        productId = item.GetProperty("mapValue").GetProperty("fields")
+                        .GetProperty("productId").GetProperty("stringValue").GetString(),
+        name = item.GetProperty("mapValue").GetProperty("fields")
+                    .GetProperty("name").GetProperty("stringValue").GetString(),
+        farmerId = item.GetProperty("mapValue").GetProperty("fields")
+                       .GetProperty("farmerId").GetProperty("stringValue").GetString(),
+        quantity = int.Parse(item.GetProperty("mapValue").GetProperty("fields")
+                        .GetProperty("quantity").GetProperty("integerValue")
+                        .GetString() ?? "0"),
+        price = item.GetProperty("mapValue").GetProperty("fields")
+                    .GetProperty("price").GetProperty("doubleValue").GetDouble()
+    }).ToList()
                     };
                     orders.Add(order);
                 }

@@ -14,5 +14,8 @@ namespace LeafBucket.Models
         public string farmerId { get; set; }
         public int quantity { get; set; }
         public double price { get; set; }
+
+        public string QuantityLabel => $"x{quantity}";
+        public string LineTotal => $"${price * quantity:0.00}";
     }
 }
