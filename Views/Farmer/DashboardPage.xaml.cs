@@ -41,6 +41,8 @@ public partial class DashboardPage : ContentPage
             
             var recent = orders?.OrderByDescending(o => o.createdAt).Take(3).ToList();
 
+
+
             recentActivityStack.Children.Clear();
 
             if (recent == null || recent.Count == 0)
@@ -104,6 +106,16 @@ public partial class DashboardPage : ContentPage
                 grid.Add(left, 0, 0);
                 grid.Add(statusBadge, 1, 0);
                 card.Content = grid;
+
+                var capturedOrder = order;
+                card.GestureRecognizers.Add(new TapGestureRecognizer
+                {
+                    Command = new Command(async () =>
+                    {
+                        await Navigation.PushAsync(new FarmerOrderDetailsPage(capturedOrder));
+                    })
+                });
+
                 recentActivityStack.Children.Add(card);
             }
         }

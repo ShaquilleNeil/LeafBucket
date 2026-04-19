@@ -8,19 +8,36 @@
 
     <RefreshView x:Name="refreshView" Refreshing="OnRefreshing">
         <ScrollView>
-            <StackLayout Padding="8" Spacing="4">
+            <StackLayout HorizontalOptions="Center"
+                         WidthRequest="600"
+                         Padding="16"
+                         Spacing="12">
 
-            
+                <Border Stroke="#E0E0E0"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 10"
+                        BackgroundColor="White"
+                        Padding="4,0">
+                    <SearchBar Placeholder="Search by item name..."
+                               TextChanged="OnSearchChanged"
+                               TextColor="Black"
+                               BackgroundColor="Transparent"/>
+                </Border>
+
                 <StackLayout x:Name="emptyState" IsVisible="False"
-                             HorizontalOptions="Center" Margin="0,80,0,0" Spacing="12">
-                    <Label Text="🛍️" FontSize="48" HorizontalOptions="Center"/>
-                    <Label Text="No orders yet" FontSize="18" FontAttributes="Bold"
+                             HorizontalOptions="Center"
+                             Margin="0,80,0,0" Spacing="12">
+                    <Label Text="🛍️" FontSize="48"
+                           HorizontalOptions="Center"/>
+                    <Label Text="No orders yet" FontSize="18"
+                           FontAttributes="Bold"
                            HorizontalOptions="Center" TextColor="#333"/>
                     <Label Text="Your past orders will appear here."
-                           FontSize="14" TextColor="#888" HorizontalOptions="Center"/>
+                           FontSize="14" TextColor="#888"
+                           HorizontalOptions="Center"/>
                 </StackLayout>
 
-                <StackLayout x:Name="ordersStack" Spacing="0">
+                <StackLayout x:Name="ordersStack" Spacing="12">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
                             <components:OrderCard

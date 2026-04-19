@@ -3,55 +3,56 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LeafBucket.Views.Customer.OrderConfirmationPage"
              Title=""
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="#F5F5F0">
 
-    <Grid RowDefinitions="*, Auto" Padding="24">
+    <Grid RowDefinitions="*,Auto" Padding="24">
 
         <VerticalStackLayout Grid.Row="0"
                              VerticalOptions="Center"
                              HorizontalOptions="Center"
                              Spacing="16">
 
-            <Frame WidthRequest="80"
-                   HeightRequest="80"
-                   CornerRadius="40"
-                   BorderColor="Black"
+            <Frame WidthRequest="100" HeightRequest="100"
+                   CornerRadius="50"
+                   BorderColor="#2E7D32"
+                   BackgroundColor="#E8F5E9"
                    HasShadow="False"
                    HorizontalOptions="Center"
                    Padding="0">
-                <Label Text="✓"
-                       FontSize="36"
+                <Label Text="✓" FontSize="44"
                        HorizontalOptions="Center"
                        VerticalOptions="Center"
-                       TextColor="Black"/>
+                       TextColor="#2E7D32"/>
             </Frame>
 
-        
-            <Label Text="ORDER PLACED!"
-                   FontSize="24"
-                   FontAttributes="Bold"
+            <Label Text="ORDER PLACED!" FontSize="26"
+                   FontAttributes="Bold" TextColor="Black"
                    HorizontalOptions="Center"/>
 
-        
-            <Label x:Name="orderId"
-                   FontSize="14"
-                   TextColor="Gray"
+            <Label x:Name="orderId" FontSize="14"
+                   TextColor="#888"
                    HorizontalOptions="Center"/>
 
         </VerticalStackLayout>
 
-       
-        <VerticalStackLayout Grid.Row="1" Spacing="12">
+        <VerticalStackLayout Grid.Row="1"
+                             HorizontalOptions="Center"
+                             WidthRequest="400"
+                             Spacing="12">
 
             <Button Text="VIEW ORDER STATUS"
-                    BackgroundColor="Black"
+                    BackgroundColor="#2E7D32"
                     TextColor="White"
-                    CornerRadius="8"
-                    HeightRequest="50"
+                    CornerRadius="10"
+                    FontSize="15"
+                    FontAttributes="Bold"
+                    Padding="0,16"
                     Clicked="OnViewOrderStatusClicked"/>
 
             <Label Text="CONTINUE SHOPPING"
                    HorizontalOptions="Center"
+                   TextColor="#2E7D32"
                    FontAttributes="Bold"
                    TextDecorations="Underline">
                 <Label.GestureRecognizers>

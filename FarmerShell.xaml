@@ -21,6 +21,10 @@
         Title="Products"
          Icon="apple.png"
         ContentTemplate="{DataTemplate farmer:ProductsPage}" />
+        <ShellContent
+         Title="Reviews"
+             Icon="user.png"
+         ContentTemplate="{DataTemplate farmer:FarmerReviewPage}" />
 
         <ShellContent
         Title="Orders"

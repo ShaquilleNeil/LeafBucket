@@ -1,6 +1,5 @@
 using System.Net.Http.Json;
 using System.Text.Json;
-using Android.App;
 using LeafBucket.Helpers;
 using LeafBucket.Models;
 
@@ -109,7 +108,7 @@ namespace LeafBucket.Services
         }
 
 
-         //save user to document in firestore
+     
        public async Task CreateUser(User user, string userId, string idToken)
         {
             var url = $"https://firestore.googleapis.com/v1/projects/{projectId}/databases/(default)/documents/users?documentId={userId}";
@@ -127,7 +126,9 @@ namespace LeafBucket.Services
                     email = new { stringValue = user.email },
                     address = new { stringValue = user.address },
                     phoneNumber = new { stringValue = user.phoneNumber },
-                    role = new { stringValue = user.role }
+                    role = new { stringValue = user.role },
+                    farmName = new { stringValue = user.farmName ?? "" },
+                    profilephoto = new { stringValue = user.profilePhoto ?? "" }
                 }
             };
 
@@ -204,7 +205,9 @@ namespace LeafBucket.Services
                 email = SafeGet("email"),
                 address = SafeGet("address"),
                 phoneNumber = SafeGet("phoneNumber"),
-                role = SafeGet("role")
+                role = SafeGet("role"),
+                farmName = SafeGet("farmName"),
+                profilePhoto = SafeGet("profilephoto")
             };
 
             Console.WriteLine($"✅ USER ROLE: {user.role}");

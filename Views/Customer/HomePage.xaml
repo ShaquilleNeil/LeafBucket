@@ -3,52 +3,52 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:components="clr-namespace:LeafBucket.Components"
              x:Class="LeafBucket.Views.Customer.HomePage"
-             >
-
+             Title="LEAF BUCKET"
+             BackgroundColor="#F5F5F0">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem
-            IconImageSource="cart.png"
-            Clicked="openCart"
-            
-            />
-
+        <ToolbarItem IconImageSource="cart.png" Clicked="openCart"/>
     </ContentPage.ToolbarItems>
 
-    <Grid RowDefinitions="Auto, *">
-            <Border
-               Grid.Row="0"
-     Stroke="DarkSlateGray"
-     StrokeThickness="2"
-     StrokeShape="RoundRectangle 10"
-     Padding="2"
-     Margin="0,0,0,20"
-               
-     >
-                <SearchBar Placeholder="Search Products..." TextChanged="SearchBar_TextChanged" />
-
-
-            </Border>
-
-            <CollectionView Grid.Row="1" x:Name="ProductsCollection" SelectionMode="Single" SelectionChanged="ProductSelected">
-                <CollectionView.ItemsLayout>
-                    <GridItemsLayout Orientation="Vertical" Span="2"/>
-                </CollectionView.ItemsLayout>
-
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <components:ProductCard
-         Name="{Binding name}"
-         Category="{Binding category}"
-         Price="{Binding formattedPrice}"
-         Location="{Binding location}"
-         ImageUrl="{Binding imageUrl}"/>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </Grid>
+    <Grid RowDefinitions="Auto,*" Padding="16" RowSpacing="12">
 
        
+        <Border Grid.Row="0"
+                Stroke="#E0E0E0"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 10"
+                BackgroundColor="White"
+                Padding="4,0">
+            <SearchBar Placeholder="Search products..."
+                       TextChanged="SearchBar_TextChanged"
+                       TextColor="Black"
+                       BackgroundColor="Transparent"/>
+        </Border>
 
+        
+        <CollectionView Grid.Row="1"
+                        x:Name="ProductsCollection"
+                        SelectionMode="Single"
+                        SelectionChanged="ProductSelected">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical"
+                                 Span="3"
+                                 HorizontalItemSpacing="12"
+                                 VerticalItemSpacing="12"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <components:ProductCard
+                        Name="{Binding name}"
+                        Category="{Binding category}"
+                        Price="{Binding formattedPrice}"
+                        Location="{Binding location}"
+                        ImageUrl="{Binding imageUrl}"
+                        Product="{Binding .}"/>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
 
 </ContentPage>

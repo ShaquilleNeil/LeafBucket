@@ -25,4 +25,9 @@ public partial class PaymentMethodPage : ContentPage
     public void OnPaymentSelected(object sender, TappedEventArgs e)
     {
     }
+    private void OnChooseCardClicked(object sender, EventArgs e)
+    {
+        selectedCardLabel.Text = "Visa ending in **** 4242";
+    }
+
 }

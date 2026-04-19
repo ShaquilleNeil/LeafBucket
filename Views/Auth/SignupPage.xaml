@@ -1,169 +1,193 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-              x:Class="LeafBucket.Views.Auth.SignupPage"
-             Title="SignUp">
-     <VerticalStackLayout
-        VerticalOptions="Center"
-        Padding="30,0"
-        >
+             x:Class="LeafBucket.Views.Auth.SignupPage"
+             Title=""
+             BackgroundColor="#F5F5F0">
 
-        <Label 
-            Text="Create your account "
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+    <ScrollView>
+        <VerticalStackLayout HorizontalOptions="Center"
+                             WidthRequest="400"
+                             Padding="30"
+                             Spacing="8">
 
-               <Entry x:Name="FirstName"
-                 Placeholder="First Name"
-                VerticalOptions="Center" 
-                Margin="0,20,0,20"
-                />
-                <Label x:Name="FirstNameErrorLabel"
-                   TextColor="Red"
-                   IsVisible="False"
-                   VerticalOptions="Center" 
-                   HorizontalOptions="Start" />
+            <Label Text="Create your account"
+                   FontSize="22" FontAttributes="Bold"
+                   TextColor="#222"
+                   HorizontalOptions="Center"
+                   Margin="0,20,0,16"/>
 
-                <Entry
-                     x:Name="LastName"
-                     Placeholder="Last Name"
-                VerticalOptions="Center" 
-                Margin="0,20,0,20"
-                />
-                    <Label x:Name="LastNameErrorLabel"
-                    TextColor="Red"
-                    IsVisible="False"
-                    VerticalOptions="Center" 
-                    HorizontalOptions="Start" />
+           
+            <Frame WidthRequest="100" HeightRequest="100"
+                   CornerRadius="50" Padding="0"
+                   HasShadow="True" BorderColor="#C8E6C9"
+                   IsClippedToBounds="True"
+                   HorizontalOptions="Center">
+                <Image x:Name="profilePhoto" Aspect="AspectFill"
+                       WidthRequest="100" HeightRequest="100"
+                       BackgroundColor="#E8F5E9"/>
+            </Frame>
+            <Button Text="Add Photo"
+                    BackgroundColor="Transparent"
+                    TextColor="#2E7D32"
+                    FontSize="13"
+                    HorizontalOptions="Center"
+                    Clicked="PickPhoto_Clicked"/>
 
-            <Entry
-                 x:Name="Email"
-                 Placeholder="Email"
-                VerticalOptions="Center" 
-                Margin="0,20,0,20"
-                />
-                    <Label x:Name="EmailErrorLabel"
-                    TextColor="Red"
-                    IsVisible="False"
-                    VerticalOptions="Center" 
-                    HorizontalOptions="Start" />
+         
+            <Label Text="FIRST NAME" FontSize="11"
+                   FontAttributes="Bold" TextColor="#888"
+                   CharacterSpacing="1.5" Margin="0,8,0,0"/>
+            <Frame Padding="12,8" CornerRadius="8"
+                   HasShadow="False" BackgroundColor="White"
+                   BorderColor="#E0E0E0">
+                <Entry x:Name="FirstName" Placeholder="First Name"
+                       BackgroundColor="Transparent"/>
+            </Frame>
+            <Label x:Name="FirstNameErrorLabel" TextColor="Red"
+                   IsVisible="False"/>
 
-            <Entry
-                 x:Name="PhoneNumber"
-                 Placeholder="Phone Number"
-                VerticalOptions="Center" 
-                Margin="0,20,0,20"
-                Keyboard="Telephone"
-                />
+           
+            <Label Text="LAST NAME" FontSize="11"
+                   FontAttributes="Bold" TextColor="#888"
+                   CharacterSpacing="1.5" Margin="0,8,0,0"/>
+            <Frame Padding="12,8" CornerRadius="8"
+                   HasShadow="False" BackgroundColor="White"
+                   BorderColor="#E0E0E0">
+                <Entry x:Name="LastName" Placeholder="Last Name"
+                       BackgroundColor="Transparent"/>
+            </Frame>
+            <Label x:Name="LastNameErrorLabel" TextColor="Red"
+                   IsVisible="False"/>
 
-                    <Label x:Name="PhoneNumberErrorLabel"
-                    TextColor="Red"
-                    IsVisible="False"
-                    VerticalOptions="Center" 
-                    HorizontalOptions="Start" />
+          
+            <Label Text="EMAIL" FontSize="11"
+                   FontAttributes="Bold" TextColor="#888"
+                   CharacterSpacing="1.5" Margin="0,8,0,0"/>
+            <Frame Padding="12,8" CornerRadius="8"
+                   HasShadow="False" BackgroundColor="White"
+                   BorderColor="#E0E0E0">
+                <Entry x:Name="Email" Placeholder="Email"
+                       BackgroundColor="Transparent"/>
+            </Frame>
+            <Label x:Name="EmailErrorLabel" TextColor="Red"
+                   IsVisible="False"/>
 
-            <Entry
-                 x:Name="Address"
-                 Placeholder="Address"
-                VerticalOptions="Center" 
-                Margin="0,20,0,20"
-                />
+         
+            <Label Text="PHONE NUMBER" FontSize="11"
+                   FontAttributes="Bold" TextColor="#888"
+                   CharacterSpacing="1.5" Margin="0,8,0,0"/>
+            <Frame Padding="12,8" CornerRadius="8"
+                   HasShadow="False" BackgroundColor="White"
+                   BorderColor="#E0E0E0">
+                <Entry x:Name="PhoneNumber" Placeholder="Phone Number"
+                       Keyboard="Telephone"
+                       BackgroundColor="Transparent"/>
+            </Frame>
+            <Label x:Name="PhoneNumberErrorLabel" TextColor="Red"
+                   IsVisible="False"/>
 
-                    <Label x:Name="AddressErrorLabel"
-                    TextColor="Red"
-                    IsVisible="False"
-                    VerticalOptions="Center" 
-                    HorizontalOptions="Start" />
+           
+            <Label Text="ADDRESS" FontSize="11"
+                   FontAttributes="Bold" TextColor="#888"
+                   CharacterSpacing="1.5" Margin="0,8,0,0"/>
+            <Frame Padding="12,8" CornerRadius="8"
+                   HasShadow="False" BackgroundColor="White"
+                   BorderColor="#E0E0E0">
+                <Entry x:Name="Address" Placeholder="Address"
+                       BackgroundColor="Transparent"/>
+            </Frame>
+            <Label x:Name="AddressErrorLabel" TextColor="Red"
+                   IsVisible="False"/>
 
-            <Entry
-                 x:Name="Password"
-                 Placeholder="Password"
-                VerticalOptions="Center" 
-                Margin="0,20,0,20"
-                />
-                    <Label x:Name="PasswordErrorLabel"
-                    TextColor="Red"
-                    IsVisible="False"
-                    VerticalOptions="Center" 
-                    HorizontalOptions="Start" />
+            <Label Text="PASSWORD" FontSize="11"
+                   FontAttributes="Bold" TextColor="#888"
+                   CharacterSpacing="1.5" Margin="0,8,0,0"/>
+            <Frame Padding="12,8" CornerRadius="8"
+                   HasShadow="False" BackgroundColor="White"
+                   BorderColor="#E0E0E0">
+                <Entry x:Name="Password" Placeholder="Password"
+                       IsPassword="True"
+                       BackgroundColor="Transparent"/>
+            </Frame>
+            <Label x:Name="PasswordErrorLabel" TextColor="Red"
+                   IsVisible="False"/>
 
-                <Entry x:Name="ConfirmPassword"
-                 Placeholder="Confirm Password"
-                VerticalOptions="Center" 
-                Margin="0,20,0,20"
-                />
-                    <Label x:Name="ConfirmPasswordErrorLabel"
-                    TextColor="Red"
-                    IsVisible="False"
-                    VerticalOptions="Center" 
-                    HorizontalOptions="Start" />
+           
+            <Label Text="CONFIRM PASSWORD" FontSize="11"
+                   FontAttributes="Bold" TextColor="#888"
+                   CharacterSpacing="1.5" Margin="0,8,0,0"/>
+            <Frame Padding="12,8" CornerRadius="8"
+                   HasShadow="False" BackgroundColor="White"
+                   BorderColor="#E0E0E0">
+                <Entry x:Name="ConfirmPassword" Placeholder="Confirm Password"
+                       IsPassword="True"
+                       BackgroundColor="Transparent"/>
+            </Frame>
+            <Label x:Name="ConfirmPasswordErrorLabel" TextColor="Red"
+                   IsVisible="False"/>
 
+           
+            <Label Text="I AM A:" FontSize="11"
+                   FontAttributes="Bold" TextColor="#888"
+                   CharacterSpacing="1.5" Margin="0,8,0,0"/>
+            <Grid ColumnDefinitions="Auto,Auto,Auto,Auto"
+                  ColumnSpacing="8" Margin="0,4,0,4">
+                <CheckBox x:Name="CustomerCheckBox" Grid.Column="0"
+                          IsChecked="False" VerticalOptions="Center"
+                          CheckedChanged="OnRoleChanged"/>
+                <Label Grid.Column="1" Text="Customer"
+                       TextColor="Black"
+                       FontSize="14" VerticalOptions="Center"/>
+                <CheckBox x:Name="FarmerCheckBox" Grid.Column="2"
+                          IsChecked="False" VerticalOptions="Center"
+                          CheckedChanged="OnRoleChanged"/>
+                <Label Grid.Column="3" Text="Farmer"
+                       TextColor="Black"
+                       FontSize="14" VerticalOptions="Center"/>
+            </Grid>
+            <Label x:Name="RoleErrorLabel" TextColor="Red"
+                   IsVisible="False"/>
 
-                <Label Text="I am a: "
-                    VerticalOptions="Center" 
-                    HorizontalOptions="Start" />
+           
+            <StackLayout x:Name="farmNameStack" IsVisible="False" Spacing="4">
+                <Label Text="FARM NAME" FontSize="11"
+                       FontAttributes="Bold" TextColor="#888"
+                       CharacterSpacing="1.5" Margin="0,8,0,0"/>
+                <Frame Padding="12,8" CornerRadius="8"
+                       HasShadow="False" BackgroundColor="White"
+                       BorderColor="#E0E0E0">
+                    <Entry x:Name="FarmName" Placeholder="Farm Name"
+                           BackgroundColor="Transparent"/>
+                </Frame>
+                <Label x:Name="FarmNameErrorLabel" TextColor="Red"
+                       IsVisible="False"/>
+            </StackLayout>
 
-           <Grid ColumnDefinitions="Auto,Auto,*,Auto"
-      ColumnSpacing="6"
-      VerticalOptions="Center"
-      Margin="0,10,0,20">
+            <Button Text="SIGN UP"
+                    BackgroundColor="#2E7D32"
+                    TextColor="White"
+                    CornerRadius="10"
+                    FontSize="15"
+                    FontAttributes="Bold"
+                    Padding="0,16"
+                    Margin="0,16,0,0"
+                    Clicked="SignUpButton_Clicked"/>
 
-    <CheckBox x:Name="CustomerCheckBox"
-              IsChecked="False"
-              VerticalOptions="Center" />
+            <Grid ColumnDefinitions="Auto,Auto" ColumnSpacing="6"
+                  HorizontalOptions="Center" Margin="0,12,0,20">
+                <Label Grid.Column="0" Text="Already have an account?"
+                       FontSize="13" TextColor="#666"
+                       VerticalOptions="Center"/>
+                <Label Grid.Column="1" Text="Login now"
+                       TextColor="#2E7D32" FontSize="13"
+                       FontAttributes="Bold" VerticalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="LoginNavigation"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
 
-    <Label Grid.Column="1"
-           Text="Customer"
-           VerticalOptions="Center" />
-
-    <CheckBox x:Name="FarmerCheckBox"
-              Grid.Column="2"
-              IsChecked="False"
-              VerticalOptions="Center" />
-
-    <Label Grid.Column="3"
-           Text="Farmer"
-           VerticalOptions="Center" /> 
-
-</Grid>
- 
- <Label x:Name="RoleErrorLabel"
-                    TextColor="Red"
-                    IsVisible="False"
-                    VerticalOptions="Center" 
-                    HorizontalOptions="Start" />
-
-            <Button Text="SignUp"
-                VerticalOptions="Center"
-                Padding="20"
-                Margin="0,0,0,20"
-                Clicked="SignUpButton_Clicked"
-                />
-
-            <Grid ColumnDefinitions="Auto,Auto"
-      ColumnSpacing="6"
-      VerticalOptions="Center"
-      HorizontalOptions="Center"
-      Margin="0,10,0,20">
-
-            <Label Grid.Column="0"
-                 Text="Already have an account?"
-                VerticalOptions="Center"
-                HorizontalOptions="Center" />
-
-            <Label Grid.Column="1"
-                 Text="Login now"
-                TextColor="#ACF117"
-                VerticalOptions="Center"
-                HorizontalOptions="Center">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="LoginNavigation" />
-                </Label.GestureRecognizers>
-            </Label>
-
-        </Grid>
-
-
-
-    </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

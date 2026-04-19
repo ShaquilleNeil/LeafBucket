@@ -8,16 +8,24 @@ public partial class MapPage : ContentPage
     private readonly UserService _userService = new();
     private List<User> _farmers = new();
     private User? _selectedFarmer;
+    private bool _isMapActive = false;
 
     public MapPage()
     {
         InitializeComponent();
     }
 
-    protected override async void OnAppearing()
+    protected override void OnAppearing()
     {
+        _isMapActive = true;
         base.OnAppearing();
-        await LoadMap();
+        _ = LoadMap();
+    }
+
+    protected override void OnDisappearing()
+    {
+        _isMapActive = false;
+        base.OnDisappearing();
     }
 
     private async Task LoadMap()
@@ -33,10 +41,7 @@ public partial class MapPage : ContentPage
             foreach (var farmer in _farmers)
             {
                 if (string.IsNullOrEmpty(farmer.address)) continue;
-
-                var locations = await Geocoding.GetLocationsAsync(farmer.address);
-                var location = locations?.FirstOrDefault();
-                if (location == null) continue;
+                if (farmer.latitude == 0 && farmer.longitude == 0) continue;
 
                 var firstName = farmer.firstName ?? "";
                 var lastName = farmer.lastName ?? "";
@@ -47,8 +52,8 @@ public partial class MapPage : ContentPage
                     id = farmer.id,
                     name = !string.IsNullOrEmpty(farmer.farmName) ? farmer.farmName : $"{firstName} {lastName}".Trim(),
                     address = farmer.address,
-                    lat = location.Latitude,
-                    lng = location.Longitude,
+                    lat = farmer.latitude,
+                    lng = farmer.longitude,
                     photo = farmer.profilePhoto ?? "",
                     initials = initials
                 });
@@ -59,22 +64,32 @@ public partial class MapPage : ContentPage
 
             mapWebView.Source = new HtmlWebViewSource { Html = html };
 
-            mapWebView.Navigating += (s, e) =>
+            mapWebView.Navigated += async (s, e) => { };
+
+            Application.Current?.Dispatcher.StartTimer(TimeSpan.FromMilliseconds(500), () =>
             {
-                if (e.Url.StartsWith("farmer://"))
+                MainThread.BeginInvokeOnMainThread(async () =>
                 {
-                    e.Cancel = true;
-                    var farmerId = e.Url.Replace("farmer://", "");
-                    var farmer = _farmers.FirstOrDefault(f => f.id == farmerId);
-                    if (farmer != null)
+                    try
                     {
-                        _selectedFarmer = farmer;
-                        farmerNameLabel.Text = $"{farmer.firstName} {farmer.lastName}";
-                        farmerAddressLabel.Text = farmer.address;
-                        farmerCard.IsVisible = true;
+                        var result = await mapWebView.EvaluateJavaScriptAsync("window.selectedFarmerId || ''");
+                        if (!string.IsNullOrEmpty(result) && result != "null")
+                        {
+                            var farmerId = result.Trim('"');
+                            var farmer = _farmers.FirstOrDefault(f => f.id == farmerId);
+                            if (farmer != null && _selectedFarmer?.id != farmerId)
+                            {
+                                _selectedFarmer = farmer;
+                                farmerNameLabel.Text = $"{farmer.firstName} {farmer.lastName}";
+                                farmerAddressLabel.Text = farmer.address;
+                                farmerCard.IsVisible = true;
+                            }
+                        }
                     }
-                }
-            };
+                    catch { }
+                });
+                return _isMapActive;
+            }); 
         }
         catch (Exception ex)
         {
@@ -118,7 +133,6 @@ public partial class MapPage : ContentPage
 
             farmers.forEach(function(farmer) {{
 
-                // Build teardrop pin element
                 var container = document.createElement('div');
                 container.style.cssText = 'display:flex;flex-direction:column;align-items:center;cursor:pointer;';
 
@@ -137,7 +151,7 @@ public partial class MapPage : ContentPage
                     justify-content: center;
                 `;
 
-                // Photo inside teardrop (rotated back 45deg to appear upright)
+               
                 var img = document.createElement('img');
                 img.src = farmer.photo || '';
                 img.style.cssText = 'width:100%;height:100%;object-fit:cover;transform:rotate(45deg);';
@@ -146,7 +160,7 @@ public partial class MapPage : ContentPage
                     fallback.style.display = 'flex';
                 }};
 
-                // Fallback initials if no photo
+               
                 var fallback = document.createElement('div');
                 fallback.style.cssText = `
                     display: ${{farmer.photo ? 'none' : 'flex'}};
@@ -166,7 +180,7 @@ public partial class MapPage : ContentPage
                 teardrop.appendChild(img);
                 teardrop.appendChild(fallback);
 
-                // Name label below pin
+                
                 var label = document.createElement('div');
                 label.style.cssText = `
                     background: #2E7D32;
@@ -191,10 +205,9 @@ public partial class MapPage : ContentPage
                     content: container,
                     title: farmer.farmName
                 }});
-
-                marker.addListener('click', function() {{
-                    window.location.href = 'farmer://' + farmer.id;
-                }});
+marker.addListener('click', function() {{
+    window.selectedFarmerId = farmer.id;
+}});
             }});
         }}
     </script>

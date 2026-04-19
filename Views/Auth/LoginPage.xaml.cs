@@ -80,11 +80,19 @@ public partial class LoginPage : ContentPage
             await SecureStorage.SetAsync("userName", user.firstName + " " + user.lastName);
 
             if (user.role == "Customer")
-    Application.Current.MainPage = new AppShell();
-else if (user.role == "Farmer")
-    Application.Current.MainPage = new FarmerShell();
-        else
-            await DisplayAlert("Error", "Unknown user role", "OK");
+            {
+                await CartManager.FetchCartFromFirestore();
+                Application.Current.MainPage = new AppShell();
+            }
+            else if (user.role == "Farmer")
+            {
+                Application.Current.MainPage = new FarmerShell();
+            }
+            else
+            {
+                await DisplayAlert("Error", "Unknown user role", "OK");
+            }
+           
     }
     catch (Exception ex)
     {

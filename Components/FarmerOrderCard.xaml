@@ -13,12 +13,11 @@
 
         <StackLayout Spacing="10">
 
-           
             <Grid ColumnDefinitions="*,Auto">
                 <Label Grid.Column="0"
                        Text="{Binding OrderId, Source={x:Reference Root}}"
                        FontSize="15" FontAttributes="Bold"
-                       TextColor="#222" VerticalOptions="Center"/>
+                       TextColor="Black" VerticalOptions="Center"/>
                 <Label Grid.Column="1"
                        Text="{Binding Status, Source={x:Reference Root}}"
                        TextColor="White" Padding="10,4"
@@ -54,11 +53,9 @@
                 </Label>
             </Grid>
 
-           
             <Label Text="{Binding Date, Source={x:Reference Root}}"
-                   FontSize="12" TextColor="#AAA"/>
+                   FontSize="12" TextColor="#888"/>
 
-           
             <Grid ColumnDefinitions="*,Auto">
                 <Label Grid.Column="0"
                        Text="{Binding Summary, Source={x:Reference Root}}"
@@ -72,7 +69,6 @@
 
             <BoxView HeightRequest="1" Color="#F0F0F0"/>
 
-          
             <Grid ColumnDefinitions="*,*" ColumnSpacing="10" IsVisible="False">
                 <Grid.Triggers>
                     <DataTrigger TargetType="Grid"
@@ -92,8 +88,7 @@
                         Clicked="OnAcceptClicked"/>
             </Grid>
 
-           
-            <Button Text="MARK AS READY"
+            <Button Text="MARK AS SHIPPED"
                     BackgroundColor="#E65100" TextColor="White"
                     CornerRadius="8" FontSize="13" FontAttributes="Bold"
                     IsVisible="False" Clicked="OnMarkReadyClicked">
@@ -106,7 +101,6 @@
                 </Button.Triggers>
             </Button>
 
-        
             <Button Text="MARK AS COMPLETED"
                     BackgroundColor="#558B2F" TextColor="White"
                     CornerRadius="8" FontSize="13" FontAttributes="Bold"
@@ -114,7 +108,7 @@
                 <Button.Triggers>
                     <DataTrigger TargetType="Button"
                                  Binding="{Binding Status, Source={x:Reference Root}}"
-                                 Value="Ready">
+                                 Value="Shipped">
                         <Setter Property="IsVisible" Value="True"/>
                     </DataTrigger>
                 </Button.Triggers>

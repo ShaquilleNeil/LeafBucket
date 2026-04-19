@@ -8,15 +8,18 @@
     <Grid RowDefinitions="*,Auto">
 
         <ScrollView Grid.Row="0">
-            <StackLayout Padding="16" Spacing="16">
+            <StackLayout HorizontalOptions="Center"
+                         WidthRequest="600"
+                         Padding="24" Spacing="16">
 
-              
+                <!-- Header -->
                 <Frame Padding="16" CornerRadius="12"
                        HasShadow="True" BackgroundColor="White">
                     <StackLayout Spacing="8">
                         <Grid ColumnDefinitions="*,Auto">
                             <Label x:Name="orderIdLabel" Grid.Column="0"
-                                   FontSize="16" FontAttributes="Bold" TextColor="#222"/>
+                                   FontSize="16" FontAttributes="Bold"
+                                   TextColor="Black"/>
                             <Frame x:Name="statusBadge" Grid.Column="1"
                                    Padding="10,4" CornerRadius="20"
                                    HasShadow="False">
@@ -24,10 +27,11 @@
                                        FontAttributes="Bold" TextColor="White"/>
                             </Frame>
                         </Grid>
-                        <Label x:Name="orderDateLabel" FontSize="12" TextColor="#AAA"/>
+                        <Label x:Name="orderDateLabel" FontSize="12" TextColor="#888"/>
                     </StackLayout>
                 </Frame>
 
+                <!-- Customer Info -->
                 <Frame Padding="16" CornerRadius="12"
                        HasShadow="True" BackgroundColor="White">
                     <StackLayout Spacing="8">
@@ -36,29 +40,29 @@
                                CharacterSpacing="1.5"/>
                         <BoxView HeightRequest="1" Color="#F0F0F0"/>
                         <Label x:Name="customerAddressLabel"
-                               FontSize="13" TextColor="#555"/>
+                               FontSize="13" TextColor="Black"/>
                     </StackLayout>
                 </Frame>
 
-               
+                <!-- Items -->
                 <Frame Padding="16" CornerRadius="12"
                        HasShadow="True" BackgroundColor="White">
                     <StackLayout Spacing="12">
                         <Label x:Name="itemsCountLabel" FontSize="16"
-                               FontAttributes="Bold" TextColor="#222"/>
+                               FontAttributes="Bold" TextColor="Black"/>
                         <BoxView HeightRequest="1" Color="#F0F0F0"/>
                         <StackLayout x:Name="itemsStack" Spacing="10">
                             <BindableLayout.ItemTemplate>
                                 <DataTemplate>
                                     <Grid ColumnDefinitions="*,Auto" Padding="0,4">
                                         <Label Grid.Column="0"
-           Text="{Binding name}"
-           FontSize="14" TextColor="#333"
-           VerticalOptions="Center"/>
+                                               Text="{Binding name}"
+                                               FontSize="14" TextColor="Black"
+                                               VerticalOptions="Center"/>
                                         <Label Grid.Column="1"
-           Text="{Binding QuantityLabel}"
-           FontSize="14" TextColor="#888"
-           VerticalOptions="Center"/>
+                                               Text="{Binding QuantityLabel}"
+                                               FontSize="14" TextColor="#888"
+                                               VerticalOptions="Center"/>
                                     </Grid>
                                 </DataTemplate>
                             </BindableLayout.ItemTemplate>
@@ -66,24 +70,24 @@
                     </StackLayout>
                 </Frame>
 
-                
+                <!-- Totals -->
                 <Frame Padding="16" CornerRadius="12"
                        HasShadow="True" BackgroundColor="White">
                     <StackLayout Spacing="10">
                         <Grid ColumnDefinitions="*,Auto">
                             <Label Text="Subtotal" FontSize="13" TextColor="#666"/>
                             <Label x:Name="subtotalLabel" Grid.Column="1"
-                                   FontSize="13" TextColor="#333"/>
+                                   FontSize="13" TextColor="Black"/>
                         </Grid>
                         <Grid ColumnDefinitions="*,Auto">
                             <Label Text="Delivery Fee" FontSize="13" TextColor="#666"/>
                             <Label x:Name="deliveryLabel" Grid.Column="1"
-                                   FontSize="13" TextColor="#333"/>
+                                   FontSize="13" TextColor="Black"/>
                         </Grid>
                         <BoxView HeightRequest="1" Color="#F0F0F0"/>
                         <Grid ColumnDefinitions="*,Auto">
                             <Label Text="Total" FontSize="15"
-                                   FontAttributes="Bold" TextColor="#222"/>
+                                   FontAttributes="Bold" TextColor="Black"/>
                             <Label x:Name="totalLabel" Grid.Column="1"
                                    FontSize="15" FontAttributes="Bold"
                                    TextColor="#2E7D32"/>
@@ -94,10 +98,9 @@
             </StackLayout>
         </ScrollView>
 
-      
         <Button x:Name="actionButton"
                 Grid.Row="1"
-                Margin="16"
+                Margin="24,16"
                 CornerRadius="10"
                 FontSize="15"
                 FontAttributes="Bold"

@@ -85,7 +85,7 @@ public partial class OrderDetailsPage : ContentPage
 
                 itemsStack.Children.Add(row);
 
-                // Divider between items
+               
                 if (order.items.Last() != item)
                 {
                     itemsStack.Children.Add(new BoxView

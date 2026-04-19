@@ -31,7 +31,7 @@ public partial class OrderSummaryPage : ContentPage
         Name.Text =  SessionManager.UserName;
         Address.Text = SessionManager.Location;
         paymentMethod.Text = PaymentMethod;
-        ItemsCollection.ItemsSource = CartManager.GetCartItems();
+        BindableLayout.SetItemsSource(itemsStack, CartManager.GetCartItems());
 
         tax.Text = $"${taxAmount:0.00}";
         deliveryFee.Text = $"${deliveryAmount:0.00}";

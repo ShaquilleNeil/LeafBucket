@@ -22,11 +22,13 @@ public partial class OrderConfirmationPage : ContentPage
 
     public async void OnViewOrderStatusClicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync($"orderdetails?orderId={_orderId}");
+        await Navigation.PopToRootAsync();
+       
+        await Shell.Current.CurrentItem.CurrentItem.Navigation.PushAsync(new OrdersPage());
     }
 
     public async void OnContinueShoppingTapped(object sender, TappedEventArgs e)
     {
-        await Shell.Current.GoToAsync("//CustomerHome");
+        await Navigation.PopToRootAsync();
     }
 }

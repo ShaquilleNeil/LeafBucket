@@ -40,6 +40,12 @@ public partial class ProductCard : ContentView
         BindableProperty.Create(nameof(Price), typeof(string), typeof(ProductCard), "");
 
 
+    public static readonly BindableProperty ProductProperty =
+        BindableProperty.Create(nameof(Product), typeof(Product), typeof(ProductCard), null);
+
+    public Product Product { get; set; }
+
+
     public string Name
     {
         get => (string)GetValue(NameProperty);

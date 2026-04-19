@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:components="clr-namespace:LeafBucket.Components"
+             x:Class="LeafBucket.Views.Customer.FarmerPublicPage"
+             Title="Farm Products"
+             BackgroundColor="#F5F5F0">
+
+    <ScrollView>
+        <StackLayout Spacing="0">
+
+          
+            <StackLayout BackgroundColor="#2E7D32" Padding="40,30"
+                         Spacing="12">
+                <Frame WidthRequest="100" HeightRequest="100"
+                       CornerRadius="50" Padding="0"
+                       HasShadow="True" BorderColor="White"
+                       IsClippedToBounds="True"
+                       HorizontalOptions="Center">
+                    <Image x:Name="farmerPhoto" Aspect="AspectFill"
+                           WidthRequest="100" HeightRequest="100"/>
+                </Frame>
+
+                <Label x:Name="farmerNameLabel"
+                       FontSize="22" FontAttributes="Bold"
+                       TextColor="White" HorizontalOptions="Center"/>
+
+                <Label x:Name="farmNameLabel"
+                       FontSize="15" TextColor="#C8E6C9"
+                       HorizontalOptions="Center"/>
+
+                <Grid ColumnDefinitions="Auto,Auto" ColumnSpacing="6"
+                      HorizontalOptions="Center">
+                    <Label Grid.Column="0" Text="📍" FontSize="13"
+                           VerticalOptions="Center"/>
+                    <Label x:Name="locationLabel" Grid.Column="1"
+                           FontSize="13" TextColor="#C8E6C9"
+                           VerticalOptions="Center"/>
+                </Grid>
+            </StackLayout>
+
+           
+            <StackLayout Padding="24" Spacing="16">
+
+                <Label Text="Available Products" FontSize="20"
+                       FontAttributes="Bold" TextColor="#222"/>
+
+               
+                <StackLayout x:Name="emptyState" IsVisible="False"
+                             HorizontalOptions="Center"
+                             Margin="0,60,0,0" Spacing="12">
+                    <Label Text="🌿" FontSize="48"
+                           HorizontalOptions="Center"/>
+                    <Label Text="No products available"
+                           FontSize="16" TextColor="#888"
+                           HorizontalOptions="Center"/>
+                </StackLayout>
+
+              
+                <CollectionView x:Name="productsCollection">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical"
+                                         Span="3"
+                                         HorizontalItemSpacing="12"
+                                         VerticalItemSpacing="12"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <components:ProductCard
+                                Name="{Binding name}"
+                                Price="{Binding formattedPrice}"
+                                ImageUrl="{Binding imageUrl}"
+                                Product="{Binding .}"/>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </StackLayout>
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

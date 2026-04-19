@@ -275,7 +275,85 @@ namespace LeafBucket.Services
             return products;
         }
 
+        public async Task<List<Product>> fetchProductsByFarmerID(string farmerId)
+        {
+            //var userId = SessionManager.UserId;
+            var idToken = SessionManager.IdToken;
 
+
+
+            var url = $"https://firestore.googleapis.com/v1/projects/{projectId}/databases/(default)/documents:runQuery";
+
+            _httpClient.DefaultRequestHeaders.Clear();
+            _httpClient.DefaultRequestHeaders.Authorization =
+                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", idToken);
+
+            var body = new
+            {
+                structuredQuery = new
+                {
+                    from = new[] { new { collectionId = "products" } },
+                    where = new
+                    {
+                        fieldFilter = new
+                        {
+                            field = new { fieldPath = "farmerId" },
+                            op = "EQUAL",
+                            value = new { stringValue = farmerId }
+                        }
+                    }
+                }
+            };
+
+            var response = await _httpClient.PostAsJsonAsync($"{url}?key={ApiKey}", body);
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorContent = await response.Content.ReadAsStringAsync();
+                throw new Exception($"Error fetching products: {errorContent}");
+            }
+
+            var content = await response.Content.ReadAsStringAsync();
+            var json = JsonDocument.Parse(content);
+            var products = new List<Product>();
+
+            foreach (var item in json.RootElement.EnumerateArray())
+            {
+                if (!item.TryGetProperty("document", out var document))
+                    continue;
+
+                if (!document.TryGetProperty("fields", out var fields))
+                    continue;
+
+                string SafeGet(string key)
+                {
+                    if (fields.TryGetProperty(key, out var prop))
+                    {
+                        if (prop.TryGetProperty("stringValue", out var value))
+                            return value.GetString() ?? "";
+                    }
+                    return "";
+                }
+
+                var product = new Product
+                {
+                    productId = document.GetProperty("name").GetString()?.Split('/').Last() ?? "",
+                    farmerId = SafeGet("farmerId"),
+                    name = SafeGet("name"),
+                    description = SafeGet("description"),
+                    category = SafeGet("category"),
+                    price = fields.TryGetProperty("price", out var price) ? price.GetProperty("doubleValue").GetDouble() : 0,
+                    unit = SafeGet("unit"),
+                    stockQuantity = fields.TryGetProperty("stockQuantity", out var qty) ? int.Parse(qty.GetProperty("integerValue").GetString() ?? "0") : 0,
+                    imageUrl = SafeGet("imageUrl"),
+                    location = SafeGet("location"),
+                    isAvailable = fields.TryGetProperty("isAvailable", out var avail) && avail.GetProperty("booleanValue").GetBoolean()
+                };
+
+                products.Add(product);
+            }
+
+            return products;
+        }
 
 
 

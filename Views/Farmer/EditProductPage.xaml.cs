@@ -13,13 +13,16 @@ public partial class EditProductPage : ContentPage
     private ProductService productService = new ProductService();
     private StorageService storageService = new StorageService();
     public EditProductPage(Product product)
-	{
-		this.product = product;
-		InitializeComponent();
-        LoadProduct();
-
+    {
+        this.product = product;
+        InitializeComponent();
     }
 
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        LoadProduct();
+    }
     private void LoadProduct()
     {
         nameEntry.Text = product.name;

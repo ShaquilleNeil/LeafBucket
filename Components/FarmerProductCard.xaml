@@ -4,51 +4,50 @@
              x:Class="LeafBucket.Components.FarmerProductCard"
              x:Name="self">
 
-    <Border StrokeShape = "RoundRectangle 10" Padding="10" WidthRequest="190">
-        <VerticalStackLayout>
-            
-            <Image
-             Source = "{Binding ImageUrl, Source={x:Reference self}}"
-             HeightRequest="120"
-             Aspect="AspectFill"/>
+    <Border StrokeShape="RoundRectangle 12"
+            Stroke="#E0E0E0"
+            BackgroundColor="White"
+            Padding="0"
+            Margin="4">
+        <VerticalStackLayout Spacing="0">
 
-            <Label
-             Text = "{Binding Category, Source={x:Reference self}}"
-             FontSize="12"
-             TextColor="Gray"/>
+            <Image Source="{Binding ImageUrl, Source={x:Reference self}}"
+                   HeightRequest="140"
+                   Aspect="AspectFill"/>
 
-            <Label
-             Text = "{Binding Name, Source={x:Reference self}}"
-             FontAttributes="Bold"
-             FontSize="16"/>
+            <VerticalStackLayout Padding="10" Spacing="4">
 
+                <Label Text="{Binding Category, Source={x:Reference self}}"
+                       FontSize="11" TextColor="#888"/>
 
-            <Label
-             Text = "{Binding Price, Source={x:Reference self}}"
-             FontSize="14"
-             TextColor="Green"
-             FontAttributes="Bold"/>
+                <Label Text="{Binding Name, Source={x:Reference self}}"
+                       FontAttributes="Bold"
+                       FontSize="15" TextColor="Black"/>
 
-            <Label
-              Text = "{Binding StockQuantity, Source={x:Reference self}}"
-              FontSize="14"
-              TextColor="Green"
-              FontAttributes="Bold"/>
+                <Label Text="{Binding Price, Source={x:Reference self}}"
+                       FontSize="14" TextColor="#2E7D32"
+                       FontAttributes="Bold"/>
 
+                <Label Text="{Binding StockQuantity, Source={x:Reference self}}"
+                       FontSize="12" TextColor="#888"/>
 
-            <Button
-             Text = "Update"
-             BackgroundColor="Blue"
-             TextColor="White"
-             Clicked="updateProduct"
-             CornerRadius="8"/>
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="8"
+                      Margin="0,8,0,0">
+                    <Button Grid.Column="0" Text="Edit"
+                            BackgroundColor="#2E7D32"
+                            TextColor="White"
+                            CornerRadius="8"
+                            FontSize="13"
+                            Clicked="updateProduct"/>
+                    <Button Grid.Column="1" Text="Delete"
+                            BackgroundColor="#C62828"
+                            TextColor="White"
+                            CornerRadius="8"
+                            FontSize="13"
+                            Clicked="deleteProduct"/>
+                </Grid>
 
-            <Button
-              Text = "Delete"
-              BackgroundColor="Red"
-              TextColor="White"
-              CornerRadius="8"
-                Clicked="deleteProduct"/>
+            </VerticalStackLayout>
         </VerticalStackLayout>
     </Border>
 </ContentView>

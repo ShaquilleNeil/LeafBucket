@@ -68,12 +68,69 @@ namespace LeafBucket.Services
                         profilePhoto = fields.TryGetProperty("profilephoto", out var photo)
          ? photo.GetProperty("stringValue").GetString() : "",
                         farmName = fields.TryGetProperty("farmName", out var farm)
-         ? farm.GetProperty("stringValue").GetString() : ""
+         ? farm.GetProperty("stringValue").GetString() : "",
+                        latitude = fields.TryGetProperty("latitude", out var lat)
+         ? lat.GetProperty("doubleValue").GetDouble() : 0,
+                        longitude = fields.TryGetProperty("longitude", out var lng)
+         ? lng.GetProperty("doubleValue").GetDouble() : 0
                     });
                 }
             }
 
             return farmers;
+        }
+
+
+
+        public async Task<(double lat, double lng)?> GeocodeAddress(string address)
+        {
+            var encodedAddress = Uri.EscapeDataString(address);
+            var url = $"https://maps.googleapis.com/maps/api/geocode/json?address={encodedAddress}&key=AIzaSyBmMYXLuJOtu1upsQvgIqZwgTzvVfA7lFw";
+
+            var response = await _httpClient.GetAsync(url);
+            if (!response.IsSuccessStatusCode) return null;
+
+            var content = await response.Content.ReadAsStringAsync();
+            var json = JsonDocument.Parse(content);
+
+            var results = json.RootElement.GetProperty("results");
+            if (results.GetArrayLength() == 0) return null;
+
+            var location = results[0]
+                .GetProperty("geometry")
+                .GetProperty("location");
+
+            var lat = location.GetProperty("lat").GetDouble();
+            var lng = location.GetProperty("lng").GetDouble();
+
+            return (lat, lng);
+        }
+
+
+        public async Task saveUserLocation(string userId, double latitude, double longitude)
+        {
+            var idToken = SessionManager.IdToken;
+            var url = $"https://firestore.googleapis.com/v1/projects/{projectId}/databases/(default)/documents/users/{userId}?key={ApiKey}&updateMask.fieldPaths=latitude&updateMask.fieldPaths=longitude";
+
+            _httpClient.DefaultRequestHeaders.Clear();
+            _httpClient.DefaultRequestHeaders.Authorization =
+                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", idToken);
+
+            var body = new
+            {
+                fields = new
+                {
+                    latitude = new { doubleValue = latitude },
+                    longitude = new { doubleValue = longitude }
+                }
+            };
+
+            var response = await _httpClient.PatchAsJsonAsync(url, body);
+            if (!response.IsSuccessStatusCode)
+            {
+                var error = await response.Content.ReadAsStringAsync();
+                throw new Exception($"Error saving location: {error}");
+            }
         }
     }
 }

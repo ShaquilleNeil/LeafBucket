@@ -2,50 +2,47 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:components="clr-namespace:LeafBucket.Components"
-              x:Class="LeafBucket.Views.Farmer.ProductsPage"
-             Title="FarmerProducts">
-    
-        <ContentPage.ToolbarItems>
-            <ToolbarItem IconImageSource="plus.png" Clicked="AddProduct_Clicked"/>
-        </ContentPage.ToolbarItems>
+             x:Class="LeafBucket.Views.Farmer.ProductsPage"
+             Title="Manage Products"
+             BackgroundColor="#F5F5F0">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="plus.png" Clicked="AddProduct_Clicked"/>
+    </ContentPage.ToolbarItems>
 
-    <Grid RowDefinitions="Auto, *"
-          WidthRequest="400">
-        <Border
-               Grid.Row="0"
-     Stroke="DarkSlateGray"
-     StrokeThickness="2"
-     StrokeShape="RoundRectangle 10"
-     Padding="2"
-     Margin="0,0,0,20"
-               
-     >
-            <SearchBar Placeholder="Search Products..." TextChanged="SearchBar_TextChanged" />
+    <Grid RowDefinitions="Auto,*" Padding="16" RowSpacing="12">
 
-
+        <Border Grid.Row="0"
+                Stroke="#E0E0E0"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 10"
+                BackgroundColor="White"
+                Padding="4,0">
+            <SearchBar Placeholder="Search products..."
+                       TextChanged="SearchBar_TextChanged"
+                       BackgroundColor="Transparent"/>
         </Border>
 
         <CollectionView Grid.Row="1" x:Name="FarmerProductsCollection">
             <CollectionView.ItemsLayout>
-                <GridItemsLayout Orientation="Vertical" Span="2"/>
+                <GridItemsLayout Orientation="Vertical"
+                                 Span="3"
+                                 HorizontalItemSpacing="12"
+                                 VerticalItemSpacing="12"/>
             </CollectionView.ItemsLayout>
-
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <components:FarmerProductCard
-    Product="{Binding .}"
-    Name="{Binding name}"
-    Category="{Binding category}"
-    Price="{Binding formattedPrice}"
-    StockQuantity="{Binding stockQuantity}"
-    ImageUrl="{Binding imageUrl}"/>
+                        Product="{Binding .}"
+                        Name="{Binding name}"
+                        Category="{Binding category}"
+                        Price="{Binding formattedPrice}"
+                        StockQuantity="{Binding stockQuantity}"
+                        ImageUrl="{Binding imageUrl}"/>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+
     </Grid>
-
-
-
 
 </ContentPage>

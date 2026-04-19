@@ -6,9 +6,10 @@
              BackgroundColor="#F5F5F0">
 
     <ScrollView>
-        <StackLayout Padding="16" Spacing="20">
+        <StackLayout HorizontalOptions="Center"
+                     WidthRequest="700"
+                     Padding="24" Spacing="20">
 
-           
             <Grid ColumnDefinitions="*,Auto" Margin="0,8,0,0">
                 <StackLayout Grid.Column="0">
                     <Label Text="LEAF BUCKET" FontSize="22"
@@ -24,65 +25,42 @@
                 </Frame>
             </Grid>
 
-           
             <Label Text="BUSINESS SNAPSHOT" FontSize="12"
                    FontAttributes="Bold" TextColor="#888"
                    CharacterSpacing="1.5"/>
 
-            
-            <Frame Padding="16" CornerRadius="12" HasShadow="True"
-                   BackgroundColor="White">
-                <Grid ColumnDefinitions="*,Auto">
-                    <StackLayout Grid.Column="0" Spacing="4">
+            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="12">
+                <Frame Grid.Column="0" Padding="16" CornerRadius="12"
+                       HasShadow="True" BackgroundColor="White">
+                    <StackLayout Spacing="4">
                         <Label Text="Total Products" FontSize="13" TextColor="#888"/>
                         <Label x:Name="totalProductsLabel" Text="0"
-                               FontSize="28" FontAttributes="Bold" TextColor="#222"/>
+                               FontSize="28" FontAttributes="Bold" TextColor="Black"/>
+                        <Label Text="🌿" FontSize="22"/>
                     </StackLayout>
-                    <Frame Grid.Column="1" WidthRequest="48" HeightRequest="48"
-                           CornerRadius="12" Padding="0" HasShadow="False"
-                           BackgroundColor="#E8F5E9">
-                        <Label Text="🌿" FontSize="22"
-                               HorizontalOptions="Center" VerticalOptions="Center"/>
-                    </Frame>
-                </Grid>
-            </Frame>
+                </Frame>
 
-           
-            <Frame Padding="16" CornerRadius="12" HasShadow="True"
-                   BackgroundColor="White">
-                <Grid ColumnDefinitions="*,Auto">
-                    <StackLayout Grid.Column="0" Spacing="4">
+                <Frame Grid.Column="1" Padding="16" CornerRadius="12"
+                       HasShadow="True" BackgroundColor="White">
+                    <StackLayout Spacing="4">
                         <Label Text="Active Orders" FontSize="13" TextColor="#888"/>
                         <Label x:Name="activeOrdersLabel" Text="0"
-                               FontSize="28" FontAttributes="Bold" TextColor="#222"/>
+                               FontSize="28" FontAttributes="Bold" TextColor="Black"/>
+                        <Label Text="📦" FontSize="22"/>
                     </StackLayout>
-                    <Frame Grid.Column="1" WidthRequest="48" HeightRequest="48"
-                           CornerRadius="12" Padding="0" HasShadow="False"
-                           BackgroundColor="#FFF8E1">
-                        <Label Text="📦" FontSize="22"
-                               HorizontalOptions="Center" VerticalOptions="Center"/>
-                    </Frame>
-                </Grid>
-            </Frame>
+                </Frame>
 
-            <Frame Padding="16" CornerRadius="12" HasShadow="True"
-                   BackgroundColor="White">
-                <Grid ColumnDefinitions="*,Auto">
-                    <StackLayout Grid.Column="0" Spacing="4">
+                <Frame Grid.Column="2" Padding="16" CornerRadius="12"
+                       HasShadow="True" BackgroundColor="White">
+                    <StackLayout Spacing="4">
                         <Label Text="Inventory Items" FontSize="13" TextColor="#888"/>
                         <Label x:Name="inventoryLabel" Text="0"
-                               FontSize="28" FontAttributes="Bold" TextColor="#222"/>
+                               FontSize="28" FontAttributes="Bold" TextColor="Black"/>
+                        <Label Text="🏪" FontSize="22"/>
                     </StackLayout>
-                    <Frame Grid.Column="1" WidthRequest="48" HeightRequest="48"
-                           CornerRadius="12" Padding="0" HasShadow="False"
-                           BackgroundColor="#E3F2FD">
-                        <Label Text="🏪" FontSize="22"
-                               HorizontalOptions="Center" VerticalOptions="Center"/>
-                    </Frame>
-                </Grid>
-            </Frame>
+                </Frame>
+            </Grid>
 
-            
             <Label Text="QUICK ACTIONS" FontSize="12"
                    FontAttributes="Bold" TextColor="#888"
                    CharacterSpacing="1.5"/>
@@ -97,7 +75,7 @@
                         <Label Text="+" FontSize="28" FontAttributes="Bold"
                                TextColor="#2E7D32" HorizontalOptions="Center"/>
                         <Label Text="Add Product" FontSize="13"
-                               TextColor="#333" HorizontalOptions="Center"/>
+                               TextColor="Black" HorizontalOptions="Center"/>
                     </StackLayout>
                 </Frame>
 
@@ -110,19 +88,17 @@
                         <Label Text="⚙️" FontSize="28"
                                HorizontalOptions="Center"/>
                         <Label Text="Manage Products" FontSize="13"
-                               TextColor="#333" HorizontalOptions="Center"/>
+                               TextColor="Black" HorizontalOptions="Center"/>
                     </StackLayout>
                 </Frame>
             </Grid>
 
-            
             <Label Text="RECENT ACTIVITY" FontSize="12"
                    FontAttributes="Bold" TextColor="#888"
                    CharacterSpacing="1.5"/>
 
             <StackLayout x:Name="recentActivityStack" Spacing="10"/>
 
-           
             <Label x:Name="noActivityLabel"
                    Text="No recent orders yet."
                    FontSize="13" TextColor="#AAA"

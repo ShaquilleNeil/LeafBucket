@@ -11,4 +11,7 @@ public class User
     public string? role { get; set; }
     public string? farmName { get; set; }
     public string? profilePhoto { get; set; }
+
+    public double latitude { get; set; }
+    public double longitude { get; set; }
 }

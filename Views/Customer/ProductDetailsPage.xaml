@@ -2,38 +2,114 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LeafBucket.Views.Customer.ProductDetailsPage"
-             Title="ProductDetails">
+             Title="Product Details"
+             BackgroundColor="#F5F5F0">
+
     <ScrollView>
+        <StackLayout HorizontalOptions="Center"
+                     WidthRequest="500"
+                     Spacing="0">
 
-        <VerticalStackLayout
-            Padding="10">
+            <Image x:Name="productImage"
+                   Aspect="AspectFill"
+                   HeightRequest="280"/>
 
-            <Image x:Name="productImage" Aspect="AspectFill" HeightRequest="200"/>
+            <StackLayout Padding="24" Spacing="16">
 
-            <FlexLayout 
-                Padding="5"
-                JustifyContent="SpaceBetween"
-                
-                >
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label x:Name="productName" Grid.Column="0"
+                           FontSize="22" FontAttributes="Bold"
+                           TextColor="#222" VerticalOptions="Center"/>
+                    <Label x:Name="productPrice" Grid.Column="1"
+                           FontSize="20" FontAttributes="Bold"
+                           TextColor="#2E7D32" VerticalOptions="Center"/>
+                </Grid>
 
-                <Label x:Name="productName" FontSize="24" FontAttributes="Bold"/>
-                <Label x:Name="productPrice" FontSize="18" TextColor="Green"/>
+                <Frame Padding="16" CornerRadius="12"
+                       HasShadow="False" BackgroundColor="White"
+                       BorderColor="#E0E0E0">
+                    <Label x:Name="productDescription"
+                           FontSize="14" TextColor="Black"
+                           LineBreakMode="WordWrap"/>
+                </Frame>
 
-            </FlexLayout>
+                <StackLayout Spacing="8">
+                    <Label Text="Qty:" FontSize="14"
+                           FontAttributes="Bold" TextColor="#888"/>
+                    <Frame Padding="4" CornerRadius="10"
+                           HasShadow="False" BackgroundColor="White"
+                           BorderColor="#E0E0E0"
+                           HorizontalOptions="Start">
+                        <Grid ColumnDefinitions="Auto,Auto,Auto" ColumnSpacing="8">
+                            <Button Grid.Column="0" Text="−"
+                                    BackgroundColor="#F5F5F0" TextColor="#222"
+                                    CornerRadius="8" WidthRequest="44"
+                                    HeightRequest="44" Padding="0"
+                                    Clicked="Decrease_Clicked"/>
+                            <Label Grid.Column="1" x:Name="quantityLabel"
+                                   Text="1" FontSize="16" TextColor="Black"
+                                   FontAttributes="Bold" WidthRequest="44"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"
+                                   HorizontalTextAlignment="Center"/>
+                            <Button Grid.Column="2" Text="+"
+                                    BackgroundColor="#F5F5F0" TextColor="#222"
+                                    CornerRadius="8" WidthRequest="44"
+                                    HeightRequest="44" Padding="0"
+                                    Clicked="Increase_Clicked"/>
+                        </Grid>
+                    </Frame>
+                </StackLayout>
 
+                <Button Text="ADD TO CART"
+                        BackgroundColor="#2E7D32" TextColor="White"
+                        CornerRadius="10" FontSize="15"
+                        FontAttributes="Bold" Padding="0,16"
+                        Clicked="AddToCart_Clicked"/>
 
-            <Label x:Name="productDescription" FontSize="16"/>
+                <!-- Reviews Section -->
+                <BoxView HeightRequest="1" Color="#E0E0E0" Margin="0,8,0,0"/>
 
-            <HorizontalStackLayout>
-                <Button Text="-" Clicked="Decrease_Clicked"/>
-                <Label x:Name="quantityLabel" Text="1"/>
-                <Button Text="+" Clicked="Increase_Clicked"/>
-            </HorizontalStackLayout>
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label Text="Reviews" FontSize="18"
+                           FontAttributes="Bold" TextColor="Black"
+                           VerticalOptions="Center"/>
+                    <Button x:Name="leaveReviewButton"
+                            Grid.Column="1"
+                            Text="Leave a Review"
+                            BackgroundColor="#2E7D32"
+                            TextColor="White"
+                            CornerRadius="8"
+                            FontSize="13"
+                            Padding="12,8"
+                            IsVisible="False"
+                            Clicked="OnLeaveReviewClicked"/>
+                </Grid>
 
+          
+                <StackLayout x:Name="ratingStack" IsVisible="False"
+                             Orientation="Horizontal" Spacing="8">
+                    <Label x:Name="avgRatingLabel" FontSize="28"
+                           FontAttributes="Bold" TextColor="Black"
+                           VerticalOptions="Center"/>
+                    <StackLayout Spacing="2" VerticalOptions="Center">
+                        <Label x:Name="starsLabel" FontSize="18"
+                               TextColor="#FFB300"/>
+                        <Label x:Name="reviewCountLabel" FontSize="12"
+                               TextColor="#888"/>
+                    </StackLayout>
+                </StackLayout>
 
-            <Button Text="Add to Cart" Clicked="AddToCart_Clicked"/>
+                <StackLayout x:Name="reviewsStack" Spacing="12"/>
 
-        </VerticalStackLayout>
+           
+                <Label x:Name="noReviewsLabel"
+                       Text="No reviews yet. Be the first to review!"
+                       FontSize="13" TextColor="#888"
+                       HorizontalOptions="Center"
+                       IsVisible="False"/>
 
+            </StackLayout>
+        </StackLayout>
     </ScrollView>
 </ContentPage>
