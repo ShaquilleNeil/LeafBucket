@@ -41,7 +41,7 @@
             <Frame Padding="12,8" CornerRadius="8"
                    HasShadow="False" BackgroundColor="White"
                    BorderColor="#E0E0E0">
-                <Entry x:Name="FirstName" Placeholder="First Name"
+                <Entry x:Name="FirstName" Placeholder="First Name" TextColor="Black"
                        BackgroundColor="Transparent"/>
             </Frame>
             <Label x:Name="FirstNameErrorLabel" TextColor="Red"
@@ -54,7 +54,7 @@
             <Frame Padding="12,8" CornerRadius="8"
                    HasShadow="False" BackgroundColor="White"
                    BorderColor="#E0E0E0">
-                <Entry x:Name="LastName" Placeholder="Last Name"
+                <Entry x:Name="LastName" Placeholder="Last Name"  TextColor="Black"
                        BackgroundColor="Transparent"/>
             </Frame>
             <Label x:Name="LastNameErrorLabel" TextColor="Red"
@@ -67,7 +67,7 @@
             <Frame Padding="12,8" CornerRadius="8"
                    HasShadow="False" BackgroundColor="White"
                    BorderColor="#E0E0E0">
-                <Entry x:Name="Email" Placeholder="Email"
+                <Entry x:Name="Email" Placeholder="Email"  TextColor="Black"
                        BackgroundColor="Transparent"/>
             </Frame>
             <Label x:Name="EmailErrorLabel" TextColor="Red"
@@ -81,8 +81,9 @@
                    HasShadow="False" BackgroundColor="White"
                    BorderColor="#E0E0E0">
                 <Entry x:Name="PhoneNumber" Placeholder="Phone Number"
-                       Keyboard="Telephone"
-                       BackgroundColor="Transparent"/>
+                   Keyboard="Telephone" TextColor="Black"
+                   BackgroundColor="Transparent"
+                   TextChanged="OnPhoneNumberChanged"/>
             </Frame>
             <Label x:Name="PhoneNumberErrorLabel" TextColor="Red"
                    IsVisible="False"/>
@@ -94,7 +95,7 @@
             <Frame Padding="12,8" CornerRadius="8"
                    HasShadow="False" BackgroundColor="White"
                    BorderColor="#E0E0E0">
-                <Entry x:Name="Address" Placeholder="Address"
+                <Entry x:Name="Address" Placeholder="Address"  TextColor="Black"
                        BackgroundColor="Transparent"/>
             </Frame>
             <Label x:Name="AddressErrorLabel" TextColor="Red"
@@ -106,7 +107,7 @@
             <Frame Padding="12,8" CornerRadius="8"
                    HasShadow="False" BackgroundColor="White"
                    BorderColor="#E0E0E0">
-                <Entry x:Name="Password" Placeholder="Password"
+                <Entry x:Name="Password" Placeholder="Password"  TextColor="Black"
                        IsPassword="True"
                        BackgroundColor="Transparent"/>
             </Frame>
@@ -120,7 +121,7 @@
             <Frame Padding="12,8" CornerRadius="8"
                    HasShadow="False" BackgroundColor="White"
                    BorderColor="#E0E0E0">
-                <Entry x:Name="ConfirmPassword" Placeholder="Confirm Password"
+                <Entry x:Name="ConfirmPassword" Placeholder="Confirm Password"  TextColor="Black"
                        IsPassword="True"
                        BackgroundColor="Transparent"/>
             </Frame>
@@ -157,7 +158,7 @@
                 <Frame Padding="12,8" CornerRadius="8"
                        HasShadow="False" BackgroundColor="White"
                        BorderColor="#E0E0E0">
-                    <Entry x:Name="FarmName" Placeholder="Farm Name"
+                    <Entry x:Name="FarmName" Placeholder="Farm Name"  TextColor="Black"
                            BackgroundColor="Transparent"/>
                 </Frame>
                 <Label x:Name="FarmNameErrorLabel" TextColor="Red"

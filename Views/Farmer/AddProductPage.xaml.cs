@@ -41,6 +41,25 @@ public partial class AddProductPage : ContentPage
         productImage.Source = ImageSource.FromFile(photo.FullPath);
     }
 
+
+    private void OnPriceChanged(object sender, TextChangedEventArgs e)
+    {
+        var entry = sender as Entry;
+        if (entry == null) return;
+        var filtered = System.Text.RegularExpressions.Regex.Replace(e.NewTextValue ?? "", @"[^\d\.]", "");
+        if (filtered != e.NewTextValue)
+            entry.Text = filtered;
+    }
+
+    private void OnStockChanged(object sender, TextChangedEventArgs e)
+    {
+        var entry = sender as Entry;
+        if (entry == null) return;
+        var filtered = System.Text.RegularExpressions.Regex.Replace(e.NewTextValue ?? "", @"[^\d]", "");
+        if (filtered != e.NewTextValue)
+            entry.Text = filtered;
+    }
+
     public async void saveProduct(object sender, EventArgs e)
     {
         string name = nameEntry.Text;

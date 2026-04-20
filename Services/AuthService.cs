@@ -153,8 +153,78 @@ namespace LeafBucket.Services
             SecureStorage.Remove("location");
         }
 
+        public async Task updateProfilePhoto(string userId, string photoUrl)
+        {
+            var idToken = SessionManager.IdToken;
+            var url = $"https://firestore.googleapis.com/v1/projects/{projectId}/databases/(default)/documents/users/{userId}?key={ApiKey}&updateMask.fieldPaths=profilephoto";
 
+            _httpClient.DefaultRequestHeaders.Clear();
+            _httpClient.DefaultRequestHeaders.Authorization =
+                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", idToken);
 
+            var body = new
+            {
+                fields = new
+                {
+                    profilephoto = new { stringValue = photoUrl }
+                }
+            };
+
+            await _httpClient.PatchAsJsonAsync(url, body);
+        }
+
+        public async Task updateUser(string userId, string farmName, string location, string phone)
+        {
+            var idToken = SessionManager.IdToken;
+            var url = $"https://firestore.googleapis.com/v1/projects/{projectId}/databases/(default)/documents/users/{userId}?key={ApiKey}&updateMask.fieldPaths=farmName&updateMask.fieldPaths=address&updateMask.fieldPaths=phoneNumber";
+
+            _httpClient.DefaultRequestHeaders.Clear();
+            _httpClient.DefaultRequestHeaders.Authorization =
+                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", idToken);
+
+            var body = new
+            {
+                fields = new
+                {
+                    farmName = new { stringValue = farmName },
+                    address = new { stringValue = location },
+                    phoneNumber = new { stringValue = phone }
+                }
+            };
+
+            var response = await _httpClient.PatchAsJsonAsync(url, body);
+            if (!response.IsSuccessStatusCode)
+            {
+                var error = await response.Content.ReadAsStringAsync();
+                throw new Exception($"Error updating profile: {error}");
+            }
+        }
+
+        public async Task updateCustomer(string userId, string address, string phone)
+        {
+            var idToken = SessionManager.IdToken;
+            var url = $"https://firestore.googleapis.com/v1/projects/{projectId}/databases/(default)/documents/users/{userId}?key={ApiKey}&updateMask.fieldPaths=address&updateMask.fieldPaths=phoneNumber";
+
+            _httpClient.DefaultRequestHeaders.Clear();
+            _httpClient.DefaultRequestHeaders.Authorization =
+                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", idToken);
+
+            var body = new
+            {
+                fields = new
+                {
+                    address = new { stringValue = address },
+                    phoneNumber = new { stringValue = phone }
+                }
+            };
+
+            var response = await _httpClient.PatchAsJsonAsync(url, body);
+            if (!response.IsSuccessStatusCode)
+            {
+                var error = await response.Content.ReadAsStringAsync();
+                throw new Exception($"Error updating profile: {error}");
+            }
+        }
 
         public async Task<User?> fetchUser(string userId, string idToken)
         {

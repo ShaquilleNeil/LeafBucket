@@ -5,7 +5,7 @@ namespace LeafBucket.Views.Customer;
 
 public partial class CartPage : ContentPage
 {
-    private const double DeliveryFee = 5.00;
+    private const double DeliveryFee = 0.10;
     private const double TaxRate = 0.05;
 
     public CartPage()
@@ -26,11 +26,12 @@ public partial class CartPage : ContentPage
         CartCollection.ItemsSource = items;
 
         var subtotal = CartManager.GetTotal();
+        var delivery = subtotal * DeliveryFee;
         var tax = subtotal * TaxRate;
-        var total = subtotal + DeliveryFee + tax;
+        var total = subtotal + delivery + tax;
 
         subtotalLabel.Text = $"Subtotal: ${subtotal:F2}";
-        deliveryLabel.Text = $"Delivery Fee: ${DeliveryFee:F2}";
+        deliveryLabel.Text = $"Delivery Fee: ${delivery:F2}";
         taxLabel.Text = $"Tax: ${tax:F2}";
         totalLabel.Text = $"Total: ${total:F2}";
     }

@@ -67,7 +67,7 @@
                         FontAttributes="Bold" Padding="0,16"
                         Clicked="AddToCart_Clicked"/>
 
-                <!-- Reviews Section -->
+               
                 <BoxView HeightRequest="1" Color="#E0E0E0" Margin="0,8,0,0"/>
 
                 <Grid ColumnDefinitions="*,Auto">

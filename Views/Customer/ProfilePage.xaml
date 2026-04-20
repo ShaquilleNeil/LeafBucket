@@ -8,27 +8,35 @@
     <ScrollView>
         <StackLayout HorizontalOptions="Center"
                      WidthRequest="500"
-                     Padding="24"
-                     Spacing="16">
+                     Padding="24" Spacing="16">
 
             <Label Text="LEAF BUCKET" FontSize="22"
                    FontAttributes="Bold" TextColor="#2E7D32"
                    HorizontalOptions="Center"/>
 
-            <Frame WidthRequest="100" HeightRequest="100"
-                   CornerRadius="50" Padding="0"
-                   HasShadow="True" BorderColor="#C8E6C9"
-                   IsClippedToBounds="True"
-                   HorizontalOptions="Center">
-                <Image x:Name="customerPhoto"
-                       Aspect="AspectFill"
-                       WidthRequest="100" HeightRequest="100"
-                       BackgroundColor="#E8F5E9"/>
-            </Frame>
+            <StackLayout HorizontalOptions="Center" Spacing="8">
+                <Frame WidthRequest="100" HeightRequest="100"
+                       CornerRadius="50" Padding="0"
+                       HasShadow="True" BorderColor="#C8E6C9"
+                       IsClippedToBounds="True"
+                       HorizontalOptions="Center">
+                    <Image x:Name="customerPhoto"
+                           Aspect="AspectFill"
+                           WidthRequest="100" HeightRequest="100"
+                           BackgroundColor="#E8F5E9"/>
+                </Frame>
+                <Button x:Name="changePhotoButton"
+                        Text="Change Photo"
+                        BackgroundColor="Transparent"
+                        TextColor="#2E7D32"
+                        FontSize="13"
+                        IsVisible="False"
+                        Clicked="OnChangePhotoClicked"/>
+            </StackLayout>
 
             <Label x:Name="customerName" Text=""
                    FontSize="20" FontAttributes="Bold"
-                   TextColor="#222" HorizontalOptions="Center"/>
+                   TextColor="Black" HorizontalOptions="Center"/>
 
             <Label x:Name="customerEmail" Text=""
                    FontSize="13" TextColor="#888"
@@ -42,11 +50,13 @@
                         <Label Text="ADDRESS" FontSize="11"
                                FontAttributes="Bold" TextColor="#888"
                                CharacterSpacing="1.5"/>
-                        <Frame Padding="12,10" CornerRadius="8"
+                        <Frame Padding="12,8" CornerRadius="8"
                                HasShadow="False" BackgroundColor="#F5F5F0"
                                BorderColor="#E0E0E0">
-                            <Label x:Name="customerAddress"
-                                   FontSize="14" TextColor="#333"/>
+                            <Entry x:Name="addressEntry"
+                                   IsReadOnly="True"
+                                   BackgroundColor="Transparent"
+                                   TextColor="Black"/>
                         </Frame>
                     </StackLayout>
 
@@ -54,16 +64,29 @@
                         <Label Text="PHONE" FontSize="11"
                                FontAttributes="Bold" TextColor="#888"
                                CharacterSpacing="1.5"/>
-                        <Frame Padding="12,10" CornerRadius="8"
+                        <Frame Padding="12,8" CornerRadius="8"
                                HasShadow="False" BackgroundColor="#F5F5F0"
                                BorderColor="#E0E0E0">
-                            <Label x:Name="customerPhone"
-                                   FontSize="14" TextColor="#333"/>
+                            <Entry x:Name="phoneEntry"
+                                   IsReadOnly="True"
+                                   BackgroundColor="Transparent"
+                                   TextColor="Black"/>
                         </Frame>
                     </StackLayout>
 
                 </StackLayout>
             </Frame>
+
+            <Button x:Name="editSaveButton"
+                    Text="EDIT PROFILE"
+                    BackgroundColor="White"
+                    TextColor="#2E7D32"
+                    BorderColor="#2E7D32"
+                    BorderWidth="1.5"
+                    CornerRadius="10"
+                    FontSize="14"
+                    FontAttributes="Bold"
+                    Clicked="OnEditProfileClicked"/>
 
             <Button Text="LOGOUT"
                     BackgroundColor="#C62828"

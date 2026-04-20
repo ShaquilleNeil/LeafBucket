@@ -29,10 +29,10 @@ public partial class ProfilePage : ContentPage
         if (user != null)
         {
             farmerNameLabel.Text = $"{user.firstName} {user.lastName}";
-            farmNameLabel.Text = user.farmName ?? "Not set";
-            locationLabel.Text = user.address ?? "Not set";
-            phoneLabel.Text = $"Ph: {user.phoneNumber}";
-            emailLabel.Text = $"Email: {user.email}";
+            farmNameEntry.Text = user.farmName ?? "";
+            locationEntry.Text = user.address ?? "";
+            phoneEntry.Text = user.phoneNumber ?? "";
+            emailEntry.Text = user.email ?? "";
 
             if (!string.IsNullOrEmpty(user.profilePhoto))
                 profilePhoto.Source = ImageSource.FromUri(new Uri(user.profilePhoto));
@@ -53,19 +53,16 @@ public partial class ProfilePage : ContentPage
             await stream.CopyToAsync(memoryStream);
             _imageData = memoryStream.ToArray();
 
-            
             profilePhoto.Source = ImageSource.FromStream(() => new MemoryStream(_imageData));
 
-           
             var fileName = $"profiles/{SessionManager.UserId}.jpg";
             var imageUrl = await _storageService.uploadImage(_imageData, fileName);
+            await _authService.updateProfilePhoto(SessionManager.UserId!, imageUrl);
 
-            Console.WriteLine($"UPLOAD URL: {imageUrl}");
             await DisplayAlert("Success", "Profile photo updated!", "OK");
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"PHOTO ERROR: {ex.Message}");
             await DisplayAlert("Error", ex.Message, "OK");
         }
     }
@@ -74,19 +71,21 @@ public partial class ProfilePage : ContentPage
     {
         _isEditing = !_isEditing;
 
+        farmNameEntry.IsReadOnly = !_isEditing;
+        locationEntry.IsReadOnly = !_isEditing;
+        phoneEntry.IsReadOnly = !_isEditing;
+        changePhotoButton.IsVisible = _isEditing;
+
         if (_isEditing)
         {
-            viewModeStack.IsVisible = false;
-            editModeStack.IsVisible = true;
-            changePhotoButton.IsVisible = true;
             editSaveButton.Text = "SAVE CHANGES";
             editSaveButton.BackgroundColor = Color.FromArgb("#2E7D32");
             editSaveButton.TextColor = Colors.White;
             editSaveButton.BorderWidth = 0;
 
-            farmNameEntry.Text = farmNameLabel.Text == "Not set" ? "" : farmNameLabel.Text;
-            locationEntry.Text = locationLabel.Text == "Not set" ? "" : locationLabel.Text;
-            phoneEntry.Text = phoneLabel.Text.Replace("Ph: ", "");
+            farmNameEntry.BackgroundColor = Colors.White;
+            locationEntry.BackgroundColor = Colors.White;
+            phoneEntry.BackgroundColor = Colors.White;
         }
         else
         {
@@ -98,17 +97,21 @@ public partial class ProfilePage : ContentPage
     {
         try
         {
-            farmNameLabel.Text = farmNameEntry.Text;
-            locationLabel.Text = locationEntry.Text;
-            phoneLabel.Text = $"Ph: {phoneEntry.Text}";
+            await _authService.updateUser(
+                SessionManager.UserId!,
+                farmNameEntry.Text ?? "",
+                locationEntry.Text ?? "",
+                phoneEntry.Text ?? ""
+            );
 
-            viewModeStack.IsVisible = true;
-            editModeStack.IsVisible = false;
-            changePhotoButton.IsVisible = false;
             editSaveButton.Text = "EDIT PROFILE";
             editSaveButton.BackgroundColor = Colors.White;
             editSaveButton.TextColor = Color.FromArgb("#2E7D32");
             editSaveButton.BorderWidth = 1.5;
+
+            farmNameEntry.BackgroundColor = Colors.Transparent;
+            locationEntry.BackgroundColor = Colors.Transparent;
+            phoneEntry.BackgroundColor = Colors.Transparent;
 
             _isEditing = false;
 
@@ -124,6 +127,11 @@ public partial class ProfilePage : ContentPage
     {
         SessionManager.UserId = null;
         SessionManager.IdToken = null;
+        SecureStorage.Remove("userId");
+        SecureStorage.Remove("idToken");
+        SecureStorage.Remove("role");
+        SecureStorage.Remove("location");
+        SecureStorage.Remove("userName");
         Application.Current.MainPage = new NavigationPage(new LoginPage());
     }
 }

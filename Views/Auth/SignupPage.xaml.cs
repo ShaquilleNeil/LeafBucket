@@ -1,6 +1,7 @@
 using LeafBucket.Helpers;
 using LeafBucket.Models;
 using LeafBucket.Services;
+using System.Text.RegularExpressions;
 
 namespace LeafBucket.Views.Auth;
 
@@ -23,19 +24,29 @@ public partial class SignupPage : ContentPage
 
     private async void PickPhoto_Clicked(object sender, EventArgs e)
     {
-        var status = await Permissions.RequestAsync<Permissions.Photos>();
-        if (status != PermissionStatus.Granted) return;
+        try
+        {
+            var photo = await MediaPicker.PickPhotoAsync();
+            if (photo == null) return;
 
-        var photo = await MediaPicker.PickPhotoAsync();
-        if (photo == null) return;
+            using var stream = await photo.OpenReadAsync();
+            using var memoryStream = new MemoryStream();
+            await stream.CopyToAsync(memoryStream);
+            _imageData = memoryStream.ToArray();
 
-        using var stream = await photo.OpenReadAsync();
-        using var memoryStream = new MemoryStream();
-        await stream.CopyToAsync(memoryStream);
-        _imageData = memoryStream.ToArray();
-
-        profilePhoto.Source = ImageSource.FromFile(photo.FullPath);
+            profilePhoto.Source = ImageSource.FromStream(() => new MemoryStream(_imageData));
+        }
+        catch { }
     }
+    private void OnPhoneNumberChanged(object sender, TextChangedEventArgs e)
+    {
+        var entry = sender as Entry;
+        if (entry == null) return;
+        var filtered = Regex.Replace(e.NewTextValue ?? "", @"[^\d\+\-\(\)\s]", "");
+        if (filtered != e.NewTextValue)
+            entry.Text = filtered;
+    }
+
 
     private void OnRoleChanged(object sender, CheckedChangedEventArgs e)
     {
@@ -58,14 +69,14 @@ public partial class SignupPage : ContentPage
         ConfirmPasswordErrorLabel.IsVisible = false;
         RoleErrorLabel.IsVisible = false;
 
-        string firstName = FirstName.Text ?? "";
-        string lastName = LastName.Text ?? "";
-        string phoneNumber = PhoneNumber.Text ?? "";
-        string address = Address.Text ?? "";
-        string email = Email.Text ?? "";
+        string firstName = FirstName.Text?.Trim() ?? "";
+        string lastName = LastName.Text?.Trim() ?? "";
+        string phoneNumber = PhoneNumber.Text?.Trim() ?? "";
+        string address = Address.Text?.Trim() ?? "";
+        string email = Email.Text?.Trim() ?? "";
         string password = Password.Text ?? "";
         string confirmPassword = ConfirmPassword.Text ?? "";
-        string farmName = FarmName.Text ?? "";
+        string farmName = FarmName.Text?.Trim() ?? "";
         string role = "";
 
         if (string.IsNullOrWhiteSpace(firstName))
@@ -89,9 +100,23 @@ public partial class SignupPage : ContentPage
             return;
         }
 
+        if (!Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+        {
+            EmailErrorLabel.Text = "Please enter a valid email address.";
+            EmailErrorLabel.IsVisible = true;
+            return;
+        }
+
         if (string.IsNullOrWhiteSpace(phoneNumber))
         {
             PhoneNumberErrorLabel.Text = "Please enter your phone number.";
+            PhoneNumberErrorLabel.IsVisible = true;
+            return;
+        }
+
+        if (!Regex.IsMatch(phoneNumber, @"^\+?[\d\s\-\(\)]{7,15}$"))
+        {
+            PhoneNumberErrorLabel.Text = "Please enter a valid phone number.";
             PhoneNumberErrorLabel.IsVisible = true;
             return;
         }
@@ -157,7 +182,8 @@ public partial class SignupPage : ContentPage
 
             if (auth == null || string.IsNullOrEmpty(auth.localId))
             {
-                await DisplayAlert("Error", "Failed to create account.", "OK");
+                EmailErrorLabel.Text = "Failed to create account.";
+                EmailErrorLabel.IsVisible = true;
                 return;
             }
 
@@ -172,26 +198,35 @@ public partial class SignupPage : ContentPage
 
             await authService.CreateUser(user, auth.localId, auth.idToken);
 
-
             try
             {
                 var coords = await _userService.GeocodeAddress(address);
                 if (coords != null)
-                {
                     await _userService.saveUserLocation(auth.localId, coords.Value.lat, coords.Value.lng);
-                }
             }
-            catch
-            {
-                // skip silently
-            }
+            catch { }
 
             await DisplayAlert("Success", "Account created successfully!", "OK");
             await Navigation.PopAsync();
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Signup Error", ex.Message, "OK");
+            var message = ex.Message;
+            if (message.Contains("EMAIL_EXISTS"))
+            {
+                EmailErrorLabel.Text = "An account with this email already exists.";
+                EmailErrorLabel.IsVisible = true;
+            }
+            else if (message.Contains("WEAK_PASSWORD"))
+            {
+                PasswordErrorLabel.Text = "Password is too weak.";
+                PasswordErrorLabel.IsVisible = true;
+            }
+            else
+            {
+                EmailErrorLabel.Text = "Signup failed. Please try again.";
+                EmailErrorLabel.IsVisible = true;
+            }
         }
     }
 }

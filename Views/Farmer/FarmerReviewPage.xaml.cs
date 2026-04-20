@@ -71,6 +71,15 @@ public partial class FarmerReviewPage : ContentPage
                 }, 1, 0);
                 stack.Children.Add(header);
 
+
+                stack.Children.Add(new Label
+                {
+                    Text = !string.IsNullOrEmpty(review.productName) ? $"📦 {review.productName}" : "📦 Unknown product",
+                    FontSize = 12,
+                    TextColor = Color.FromArgb("#2E7D32"),
+                    FontAttributes = FontAttributes.Bold
+                });
+
                 stack.Children.Add(new Label
                 {
                     Text = review.StarDisplay,

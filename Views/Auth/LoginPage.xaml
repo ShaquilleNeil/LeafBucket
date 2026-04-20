@@ -53,10 +53,7 @@
 
             <Grid ColumnDefinitions="Auto,Auto,*,Auto"
                   ColumnSpacing="6" Margin="0,8,0,0">
-                <CheckBox Grid.Column="0" IsChecked="False"
-                          VerticalOptions="Center"/>
-                <Label Grid.Column="1" Text="Remember me" TextColor="Black"
-                       VerticalOptions="Center" FontSize="13"/>
+               
                 <Label Grid.Column="3" Text="Forgot password?"
                        TextColor="#2E7D32" FontSize="13"
                        VerticalOptions="Center" HorizontalOptions="End">

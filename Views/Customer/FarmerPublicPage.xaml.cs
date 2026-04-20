@@ -62,5 +62,18 @@ public partial class FarmerPublicPage : ContentPage
             Console.WriteLine($"FARMER PUBLIC ERROR: {ex.Message}");
             await DisplayAlert("Error", ex.Message, "OK");
         }
+
+
+
+    }
+
+
+    private async void OnProductSelected(object sender, SelectionChangedEventArgs e)
+    {
+        if (e.CurrentSelection.FirstOrDefault() is Product product)
+        {
+            ((CollectionView)sender).SelectedItem = null;
+            await Navigation.PushAsync(new ProductDetailsPage(product));
+        }
     }
 }

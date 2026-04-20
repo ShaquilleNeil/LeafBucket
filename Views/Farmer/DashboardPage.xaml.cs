@@ -8,6 +8,7 @@ public partial class DashboardPage : ContentPage
 {
     private readonly OrderService _orderService = new();
     private readonly ProductService _productService = new();
+    private readonly ReviewService _reviewService = new();
 
     public DashboardPage()
     {
@@ -27,7 +28,6 @@ public partial class DashboardPage : ContentPage
             var name = SessionManager.UserName ?? "F";
             profileInitials.Text = name.Length > 0 ? name[0].ToString().ToUpper() : "F";
 
-            
             var products = await _productService.fetchFarmerProducts();
             totalProductsLabel.Text = products?.Count.ToString() ?? "0";
             inventoryLabel.Text = products?.Sum(p => p.stockQuantity).ToString() ?? "0";
@@ -38,10 +38,10 @@ public partial class DashboardPage : ContentPage
                 .ToList();
             activeOrdersLabel.Text = activeOrders?.Count.ToString() ?? "0";
 
-            
+            var reviews = await _reviewService.fetchReviews(SessionManager.UserId!);
+            newReviewsLabel.Text = reviews?.Count.ToString() ?? "0";
+
             var recent = orders?.OrderByDescending(o => o.createdAt).Take(3).ToList();
-
-
 
             recentActivityStack.Children.Clear();
 
@@ -133,5 +133,10 @@ public partial class DashboardPage : ContentPage
     private async void OnManageProductsTapped(object sender, TappedEventArgs e)
     {
         await Navigation.PushAsync(new ProductsPage());
+    }
+
+    private async void OnReviewsTapped(object sender, TappedEventArgs e)
+    {
+        Shell.Current.CurrentItem.CurrentItem = Shell.Current.CurrentItem.Items[2];
     }
 }

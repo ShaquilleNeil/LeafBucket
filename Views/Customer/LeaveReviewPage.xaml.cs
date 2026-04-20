@@ -58,6 +58,7 @@ public partial class LeaveReviewPage : ContentPage
             {
                 reviewId = Guid.NewGuid().ToString(),
                 productId = _product.productId,
+                productName = _product.name,
                 farmerId = _product.farmerId,
                 customerId = SessionManager.UserId,
                 customerName = SessionManager.UserName,

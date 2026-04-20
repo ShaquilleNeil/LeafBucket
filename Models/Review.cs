@@ -11,6 +11,7 @@ public class Review
     public string? comment { get; set; }
     public string? farmerReply { get; set; }
     public string? customerName { get; set; }
+    public string? productName { get; set; }
     public List<string?>? photos { get; set; }
     public DateTime createdAt { get; set; }
     public DateTime updatedAt { get; set; }

@@ -56,8 +56,10 @@
                            HorizontalOptions="Center"/>
                 </StackLayout>
 
-              
-                <CollectionView x:Name="productsCollection">
+
+                <CollectionView x:Name="productsCollection"
+                SelectionMode="Single"
+                SelectionChanged="OnProductSelected">
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Orientation="Vertical"
                                          Span="3"

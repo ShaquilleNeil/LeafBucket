@@ -31,7 +31,7 @@
                     </StackLayout>
                 </Frame>
 
-                <!-- Customer Info -->
+               
                 <Frame Padding="16" CornerRadius="12"
                        HasShadow="True" BackgroundColor="White">
                     <StackLayout Spacing="8">
@@ -44,7 +44,7 @@
                     </StackLayout>
                 </Frame>
 
-                <!-- Items -->
+            
                 <Frame Padding="16" CornerRadius="12"
                        HasShadow="True" BackgroundColor="White">
                     <StackLayout Spacing="12">
@@ -70,7 +70,7 @@
                     </StackLayout>
                 </Frame>
 
-                <!-- Totals -->
+             
                 <Frame Padding="16" CornerRadius="12"
                        HasShadow="True" BackgroundColor="White">
                     <StackLayout Spacing="10">

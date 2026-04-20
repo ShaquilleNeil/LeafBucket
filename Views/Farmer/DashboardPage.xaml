@@ -29,34 +29,47 @@
                    FontAttributes="Bold" TextColor="#888"
                    CharacterSpacing="1.5"/>
 
-            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="12">
+            <Grid ColumnDefinitions="*,*,*,*" ColumnSpacing="12">
                 <Frame Grid.Column="0" Padding="16" CornerRadius="12"
-                       HasShadow="True" BackgroundColor="White">
+           HasShadow="True" BackgroundColor="White">
                     <StackLayout Spacing="4">
                         <Label Text="Total Products" FontSize="13" TextColor="#888"/>
                         <Label x:Name="totalProductsLabel" Text="0"
-                               FontSize="28" FontAttributes="Bold" TextColor="Black"/>
+                   FontSize="28" FontAttributes="Bold" TextColor="Black"/>
                         <Label Text="🌿" FontSize="22"/>
                     </StackLayout>
                 </Frame>
 
                 <Frame Grid.Column="1" Padding="16" CornerRadius="12"
-                       HasShadow="True" BackgroundColor="White">
+           HasShadow="True" BackgroundColor="White">
                     <StackLayout Spacing="4">
                         <Label Text="Active Orders" FontSize="13" TextColor="#888"/>
                         <Label x:Name="activeOrdersLabel" Text="0"
-                               FontSize="28" FontAttributes="Bold" TextColor="Black"/>
+                   FontSize="28" FontAttributes="Bold" TextColor="Black"/>
                         <Label Text="📦" FontSize="22"/>
                     </StackLayout>
                 </Frame>
 
                 <Frame Grid.Column="2" Padding="16" CornerRadius="12"
-                       HasShadow="True" BackgroundColor="White">
+           HasShadow="True" BackgroundColor="White">
                     <StackLayout Spacing="4">
                         <Label Text="Inventory Items" FontSize="13" TextColor="#888"/>
                         <Label x:Name="inventoryLabel" Text="0"
-                               FontSize="28" FontAttributes="Bold" TextColor="Black"/>
+                   FontSize="28" FontAttributes="Bold" TextColor="Black"/>
                         <Label Text="🏪" FontSize="22"/>
+                    </StackLayout>
+                </Frame>
+
+                <Frame Grid.Column="3" Padding="16" CornerRadius="12"
+           HasShadow="True" BackgroundColor="White">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnReviewsTapped"/>
+                    </Frame.GestureRecognizers>
+                    <StackLayout Spacing="4">
+                        <Label Text="New Reviews" FontSize="13" TextColor="#888"/>
+                        <Label x:Name="newReviewsLabel" Text="0"
+                   FontSize="28" FontAttributes="Bold" TextColor="Black"/>
+                        <Label Text="⭐" FontSize="22"/>
                     </StackLayout>
                 </Frame>
             </Grid>
